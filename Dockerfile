@@ -1,6 +1,6 @@
 FROM golang:latest
 
-WORKDIR public.html /whitehart
+WORKDIR cloudbuild.yaml public.html /whitehart
 
 COPY . .
 
