@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Whitehart</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f34ab3dac3.js"></script>
+
+    <style>
+        body {
+            background-color: #222;
+        }
+        .left {
+            text-align: left;
+        }
+        .center {
+            text-align: center;
+        }
+        .right {
+            text-align: right;
+        }
+        *:focus {
+            outline: none;
+        }
+        input {
+            background-color: #222;
+            font-weight: 100;
+            color: ghostwhite;
+            border: none;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
+        .redder {
+            color: #E57373;
+        }
+        .greener {
+            color: #81C784;
+        }
+        .clicker {
+            cursor: pointer;
+        }
+        .robo {
+            font-family: 'Roboto', sans-serif;
+        }
+        .uname {
+            color: #777;
+            font-weight: 100;
+            letter-spacing: 1px;
+            font-size: .7em;
+        }
+        @media (max-width: 544px) {  
+    .logoimg {height: 10px;}
+  }
+
+@media (min-width: 544px) {  
+    .logoimg {height: 20px;}
+  }
+
+  @media (min-width: 768px) {  
+    .logoimg {height: 35px;}
+  }
+
+  @media (min-width: 992px) { 
+    .logoimg {height: 30px;}
+
+  }
+        .cart {
+            color: #777;
+            font-weight: 100;
+            letter-spacing: 2px;
+            font-size: .7em;
+        }
+        .navtop {
+            color: ghostwhite;
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-size: .8em;
+        }
+        .navtop:hover {
+            font-weight: 400;
+        }
+
+        .txt {
+            color: ghostwhite;
+            font-weight: 100;
+            letter-spacing: 1px;
+            font-size: .8em;
+        }
+.bigger {
+    width: 100%;
+}
+.picrow {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.headerow {
+    margin-bottom: 6px;
+    margin-top: 4px;
+}
+.aboutxt {
+    font-size: .9em;
+    color: ghostwhite;
+    font-weight: 300;
+}
+.fa-circle:hover {
+    color: #3b5998;
+}
+.fa-plus:hover {
+    color: #81C784;
+}
+.dropdown-toggle::after {
+    display:none;
+}
+.dropdown-menu {
+    background-color: #222;
+}
+.dropdown-item {
+    color: ghostwhite;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+}
+.dropdown-item:hover {
+            background-color:#333;
+            color: ghostwhite;
+            font-weight: 300;
+ }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <!-- HEADER -->
+        <div class="row headerow">
+            <div class="col-6 left">
+                <img id="logo" class="logoimg clicker" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
+            </div>
+            <div class="col-6 right">
+                <div class="btn-group">
+                    <span id="facebook" class="navtop robo clicker" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-circle"></i></span>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <div class="clicker dropdown-item">Menu</div>
+                      <div class="clicker dropdown-item">Stock</div>
+                      <div class="clicker dropdown-item">Days</div>
+                      <div class="clicker dropdown-item">Staff</div>
+                      <div class="clicker dropdown-item">Customer</div>
+                      <div class="clicker dropdown-item">Supplier</div>
+                      <div class="clicker dropdown-item">Settings</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HOME -->
+        <div id="homeview">
+            <div class="row">
+                <div class="col-12">
+                    <span class="txt robo">Menu</span>
+                    <span class="greener robo">+</span>
+                    <span class="greener robo">New Item</span>
+                    <span class="redder robo">x</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 col-md-2 col-lg-1 left">
+                    <span class="numtagspread robo">SIZE</span>
+                    <div class="robo txt clicker">100ml</div>
+                    <div class="robo txt clicker">400ml</div>
+                    <div class="robo txt clicker">600ml</div>
+                </div>
+                <div class="col-4 col-md-2 col-lg-1 left">
+                    <span class="numtagspread robo">RATE</span>
+                    <div class="robo txt clicker">$14.30</div>
+                    <div class="robo txt clicker">$14.30</div>
+                </div>
+                <div class="col-4 col-md-2 col-lg-1 left">
+                    <span class="numtagspread robo">LABEL</span>
+                    <div class="robo txt clicker">MEDIUM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENU -->
+        <div id="menuview">
+            <div class="numbody row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-10 center txt robo">
+                        Beer Wine Bottles Cans Cocktails Food
+                </div>
+            </div>
+        </div>
+        
+        <!-- EVENTS -->
+        <div id="eventsview">
+            <div class="numbody row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-10 center txt robo">
+                    Mon 10, August
+                </div>
+            </div>
+        </div>
+        
+        <!-- MUSIC -->
+        <div id="musicview">
+            <div class="numbody row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-10 center txt robo">
+                    Music
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+    <script>
+
+    $("#menuview").hide();
+    $("#musicview").hide();
+    $("#eventsview").hide();
+
+    $("#logo").click(function() {
+        $("#homeview").show();
+        $("#musicview").hide();
+        $("#menuview").hide();
+        $("#eventsview").hide();
+    });
+
+
+    $("#login").click(function() {
+        $("#homeview").hide();
+        $("#musicview").hide();
+        $("#menuview").hide();
+        $("#eventsview").hide();
+    });
+
+    $("#menu").click(function() {
+        $("#homeview").hide();
+        $("#musicview").hide();
+        $("#menuview").show();
+        $("#eventsview").hide();
+    });
+
+    $("#events").click(function() {
+        $("#homeview").hide();
+        $("#musicview").hide();
+        $("#menuview").hide();
+        $("#eventsview").show();
+    });
+    
+    $("#music").click(function() {
+        $("#homeview").hide();
+        $("#musicview").show();
+        $("#menuview").hide();
+        $("#eventsview").hide();
+    });
+
+    </script>
+</body>
+</html>
