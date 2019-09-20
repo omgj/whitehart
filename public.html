@@ -52,15 +52,30 @@
         .robo {
             font-family: 'Roboto', sans-serif;
         }
+        .menutypesitem {
+            font-family: 'Roboto', sans-serif;
+            color: ghostwhite;
+            font-weight: 300;
+            font-size: .9em;
+            letter-spacing: 1px;
+        }
+        .menutypes {
+            padding-left: 5px !important;
+            padding-right: 5px !important;
+        }
         .uname {
             color: #777;
             font-weight: 100;
             letter-spacing: 1px;
             font-size: .7em;
         }
-        @media (max-width: 544px) {  
-    .logoimg {height: 20px;}
-  }
+        @media (max-width: 544px) {
+.logoimg {
+    height: 31px;
+    text-align: center;
+    margin-top: 5px;
+}
+}
 
 @media (min-width: 544px) {  
     .logoimg {height: 20px;}
@@ -115,12 +130,9 @@
 .fa-facebook:hover {
     color: #3b5998;
 }
+a { color: inherit; } 
 .fa-instagram:hover {
     color: #fe4164;
-}
-.col-12, .col-md-6, .col-lg-6 {
-    padding-left: 0px;
-    padding-right: 0px;
 }
     </style>
 </head>
@@ -129,32 +141,33 @@
 
         <!-- HEADER -->
         <div class="row headerow">
-            <div class="col-12 left">
+            <div class="col-12 center">
                 <img id="logo" class="logoimg clicker" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
             </div>
             <div class="col-12 center">
                 <span id="menu" class="navtop robo clicker">MENU</span>&nbsp;&nbsp;
                 <span id="music" class="navtop robo clicker">MUSIC</span>&nbsp;&nbsp;
                 <span id="events" class="navtop robo clicker">EVENTS</span>&nbsp;&nbsp;
-                <span id="instagram" class="navtop robo clicker"><i class="fab fa-instagram"></i></span>&nbsp;&nbsp;
-                <span id="facebook" class="navtop robo clicker"><i class="fab fa-facebook"></i></span>
+                <span id="instagram" class="navtop robo clicker"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                <span id="facebook" class="navtop robo clicker"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
             </div>
         </div>
 
         <!-- HOME -->
         <div id="homeview">
-            <div class="row">
-                <div class="col-12">
-                    <img class="bigger" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="pic">
-                    <img class="bigger" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="pic">
-                    <img class="bigger" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="pic">
-                </div>
-                <div class="col-12">
-                    <p class="txt robo">Whitehart is about something.</p>
-                    <p class="txt robo">Whitehart is about something.</p>
-                    <p class="txt robo">Whitehart is about something.</p>
-                    <p class="txt robo">Whitehart is about something.</p>
-                    <p class="txt robo">Whitehart is about something.</p>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6 center">
+                    <p class="txt robo center">The white hart has always been a creature of myth and legend.</p>
+
+                    <p class="txt robo center">The ancient Celts saw it as a harbinger of doom. The French believed that to harm a white hart meant to be eternally cursed with the pain of unrequited love. The Scots saw it as a symbol of purity, redemption and good fortune.</p>
+                        
+                        <p class="txt robo center">But you don't have to worry about any of that because in Melbourne, it means only one thing - an all encompassing gathering space with great music, the finest craft beers and cocktails, boutique wines, great food and a kaleidoscopic visual feast of projections and graffiti.</p>
+                        
+                        <p class="txt robo center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p>
+                        
+                        <p class="txt robo center">Melbournes CBD now has a WHITE HART.</p>
+                        
+                        <p class="txt robo center">View our current food and drink menus below.</p>
                 </div>
             </div>
         </div>
@@ -162,10 +175,21 @@
         <!-- MENU -->
         <div id="menuview">
             <div class="numbody row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-10 center txt robo">
-                        Beer Wine Bottles Cans Cocktails Food
+                <div class="col-12 col-md-10 col-lg-10 center menutypes">
+                    <span id="beer" class="menutypesitem">Beer</span>&nbsp;
+                    <span id="wine" class="menutypesitem">Wine</span>&nbsp;
+                    <span id="bottles" class="menutypesitem">Bottles</span>&nbsp;
+                    <span id="cans" class="menutypesitem">Cans</span>&nbsp;
+                    <span id="cocktails" class="menutypesitem">Cocktails</span>&nbsp;
+                    <span id="food" class="menutypesitem">Food</span>
                 </div>
             </div>
+            <div id="beerbody" class="row">beer</div>
+            <div id="winebody" class="row">wine</div>
+            <div id="bottlesbody" class="row">bottles</div>
+            <div id="cansbody" class="row">cans</div>
+            <div id="cocktailsbody" class="row">cocktails</div>
+            <div id="foodbody" class="row">food</div>
         </div>
         
         <!-- EVENTS -->

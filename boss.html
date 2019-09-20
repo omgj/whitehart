@@ -58,20 +58,24 @@
             letter-spacing: 1px;
             font-size: .7em;
         }
-        @media (max-width: 544px) {  
-    .logoimg {height: 10px;}
-  }
+        @media (max-width: 544px) {
+.logoimg {
+    height: 31px;
+    text-align: center;
+    margin-top: 5px;
+}
+}
 
 @media (min-width: 544px) {  
     .logoimg {height: 20px;}
   }
 
   @media (min-width: 768px) {  
-    .logoimg {height: 35px;}
+    .logoimg {height: 15px;}
   }
 
   @media (min-width: 992px) { 
-    .logoimg {height: 30px;}
+    .logoimg {height: 10px;}
 
   }
         .cart {
@@ -112,28 +116,14 @@
     color: ghostwhite;
     font-weight: 300;
 }
-.fa-circle:hover {
+.fa-facebook:hover {
     color: #3b5998;
 }
-.fa-plus:hover {
-    color: #81C784;
+.fa-instagram:hover {
+    color: #fe4164;
 }
-.dropdown-toggle::after {
-    display:none;
-}
-.dropdown-menu {
-    background-color: #222;
-}
-.dropdown-item {
-    color: ghostwhite;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
-}
-.dropdown-item:hover {
-            background-color:#333;
-            color: ghostwhite;
-            font-weight: 300;
- }
+a { color: inherit; } 
+
     </style>
 </head>
 <body>
@@ -141,125 +131,74 @@
 
         <!-- HEADER -->
         <div class="row headerow">
-            <div class="col-6 left">
+            <div class="col-12 center">
                 <img id="logo" class="logoimg clicker" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
             </div>
-            <div class="col-6 right">
-                <div class="btn-group">
-                    <span id="facebook" class="navtop robo clicker" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-circle"></i></span>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <div class="clicker dropdown-item">Menu</div>
-                      <div class="clicker dropdown-item">Stock</div>
-                      <div class="clicker dropdown-item">Days</div>
-                      <div class="clicker dropdown-item">Staff</div>
-                      <div class="clicker dropdown-item">Customer</div>
-                      <div class="clicker dropdown-item">Supplier</div>
-                      <div class="clicker dropdown-item">Settings</div>
-                    </div>
-                </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <span class="robo"></span>
             </div>
         </div>
 
-        <!-- HOME -->
-        <div id="homeview">
+        <div class="row">
+            <div class="col-12">
+                <span class="robo">Pending</span>
+            </div>
+        </div>
+        <div id="pendingdays">
             <div class="row">
-                <div class="col-12">
-                    <span class="txt robo">Menu</span>
-                    <span class="greener robo">+</span>
-                    <span class="greener robo">New Item</span>
-                    <span class="redder robo">x</span>
-                </div>
+                <div class="col-2">11/1</div>
+                <div class="col-">11/1</div>
             </div>
-            <div class="row">
-                <div class="col-4 col-md-2 col-lg-1 left">
-                    <span class="numtagspread robo">SIZE</span>
-                    <div class="robo txt clicker">100ml</div>
-                    <div class="robo txt clicker">400ml</div>
-                    <div class="robo txt clicker">600ml</div>
-                </div>
-                <div class="col-4 col-md-2 col-lg-1 left">
-                    <span class="numtagspread robo">RATE</span>
-                    <div class="robo txt clicker">$14.30</div>
-                    <div class="robo txt clicker">$14.30</div>
-                </div>
-                <div class="col-4 col-md-2 col-lg-1 left">
-                    <span class="numtagspread robo">LABEL</span>
-                    <div class="robo txt clicker">MEDIUM</div>
-                </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <span class="robo">Open</span>
             </div>
         </div>
 
-        <!-- MENU -->
-        <div id="menuview">
-            <div class="numbody row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-10 center txt robo">
-                        Beer Wine Bottles Cans Cocktails Food
+        <div class="row justify-content-center">
+            <form id="userform" method="post">
+                <div class="col-12 center">
+                        <input autocomplete="off" name="user" id="user" type="number" maxlength="10" placeholder="Mobile"/>
                 </div>
-            </div>
+            </form>
         </div>
-        
-        <!-- EVENTS -->
-        <div id="eventsview">
-            <div class="numbody row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-10 center txt robo">
-                    Mon 10, August
-                </div>
-            </div>
-        </div>
-        
-        <!-- MUSIC -->
-        <div id="musicview">
-            <div class="numbody row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-10 center txt robo">
-                    Music
-                </div>
+        <div class="row">
+            <div class="col-12 center">
+                <span id="login" class="robo greener clicker">LOGIN</span>
             </div>
         </div>
 
-        
     </div>
 
     <script>
 
-    $("#menuview").hide();
-    $("#musicview").hide();
-    $("#eventsview").hide();
+        $("#login").click(function() {
+            var user = $("#user").val();
+            var formdata = new FormData();
+            formdata.append("user", user);
+            var request = new XMLHttpRequest();
+            request.open("POST", "/login");
+            request.send(formdata);
+        });
+        
+        // $("#user").keyup(function() {
+        //     var a = $("#user").val();
+        //     if (!a.includes("04")) {
+        //         $("#pwd").show();
+        //         $("#login").text("LOGIN");
+        //         return
+        //     }
+        //     $("#login").text("SMS");
+        //     $("#pwd").hide();
+        // });
+        // $("#login").click(function() {
 
-    $("#logo").click(function() {
-        $("#homeview").show();
-        $("#musicview").hide();
-        $("#menuview").hide();
-        $("#eventsview").hide();
-    });
-
-
-    $("#login").click(function() {
-        $("#homeview").hide();
-        $("#musicview").hide();
-        $("#menuview").hide();
-        $("#eventsview").hide();
-    });
-
-    $("#menu").click(function() {
-        $("#homeview").hide();
-        $("#musicview").hide();
-        $("#menuview").show();
-        $("#eventsview").hide();
-    });
-
-    $("#events").click(function() {
-        $("#homeview").hide();
-        $("#musicview").hide();
-        $("#menuview").hide();
-        $("#eventsview").show();
-    });
-    
-    $("#music").click(function() {
-        $("#homeview").hide();
-        $("#musicview").show();
-        $("#menuview").hide();
-        $("#eventsview").hide();
-    });
+        // });
 
     </script>
 </body>

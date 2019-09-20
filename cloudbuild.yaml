@@ -1,12 +1,12 @@
 steps:
   # build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/whartbar/whitehartweb', '.']
+  args: ['build', '-t', 'gcr.io/whartbar/ww', '.']
   # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/whartbar/whitehartweb']
+  args: ['push', 'gcr.io/whartbar/ww']
   # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['beta', 'run', 'deploy', 'cdservice', '--image', 'gcr.io/whartbar/whitehartweb', '--region', 'us-central1','--platform', 'managed', '--quiet']
+  args: ['beta', 'run', 'deploy', 'ww', '--image', 'gcr.io/whartbar/ww', '--region', 'us-central1','--platform', 'managed', '--quiet', '--allow-unauthenticated']
 images:
-- gcr.io/whartbar/whitehartweb
+- gcr.io/whartbar/ww
