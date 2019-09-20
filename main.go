@@ -45,14 +45,8 @@ func login(w http.ResponseWriter, r *http.Request) {
 		a = "Empty"
 	}
 	peep := fs.Doc("people/when")
-	_, err := peep.Create(context.Background(), User{
+	_, err := peep.Set(context.Background(), User{
 		Mobile: a,
-	})
-	if err != nil {
-		panic(err)
-	}
-	_, err = peep.Create(context.Background(), User{
-		Mobile: "hello",
 	})
 	if err != nil {
 		panic(err)
