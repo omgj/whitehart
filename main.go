@@ -49,14 +49,14 @@ func register(w http.ResponseWriter, r *http.Request) {
 	apword := r.FormValue("pword")
 	_, err := fs.Collection("people").Doc(auser).Get(context.Background())
 	if err == nil {
-		w.Write([]byte(`user already exists`))
+		w.Write([]byte(`<span class="robo txt">user already exists</span>`))
 		return
 	}
 	wr, err := fs.Collection("people").Doc(auser).Set(context.Background(), map[string]interface{}{
 		"pword": apword,
 	})
 	if err != nil {
-		w.Write([]byte(`unable to register`))
+		w.Write([]byte(`<span class="robo txt">unable to register</span>`))
 		return
 	}
 	log.Println(wr.UpdateTime)
@@ -67,15 +67,15 @@ func login(w http.ResponseWriter, r *http.Request) {
 	apword := r.FormValue("pword")
 	dd, err := fs.Collection("people").Doc(auser).Get(context.Background())
 	if err != nil {
-		w.Write([]byte(`no such user`))
+		w.Write([]byte(`<span class="robo txt">no such user</span>`))
 		return
 	}
 	ddd := dd.Data()
 	if ddd["pword"] == apword {
-		w.Write([]byte(`correct pwd`))
+		w.Write([]byte(`<span class="robo txt">correct pwd</span>`))
 		return
 	}
-	w.Write([]byte(`incorrect password`))
+	w.Write([]byte(`<span class="robo txt">incorrect password</span>`))
 }
 
 func boss(w http.ResponseWriter, r *http.Request) {
