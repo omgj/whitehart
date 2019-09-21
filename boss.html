@@ -13,7 +13,7 @@
 
     <style>
         body {
-            background-color: #222;
+            background-color: #212121;
         }
         .left {
             text-align: left;
@@ -64,19 +64,30 @@
     text-align: center;
     margin-top: 5px;
 }
+.logoleft {
+    text-align: center;
+}
 }
 
 @media (min-width: 544px) {  
     .logoimg {height: 20px;}
+    .logoleft {
+        text-align: left;
+    }
   }
 
   @media (min-width: 768px) {  
     .logoimg {height: 15px;}
+    .logoleft {
+        text-align: left;
+    }
   }
 
   @media (min-width: 992px) { 
     .logoimg {height: 10px;}
-
+    .logoleft {
+        text-align: left;
+    }
   }
         .cart {
             color: #777;
@@ -85,20 +96,21 @@
             font-size: .7em;
         }
         .navtop {
-            color: ghostwhite;
-            font-weight: 300;
+            color: #777;
+            font-weight: 100;
             letter-spacing: 2px;
             font-size: .8em;
         }
         .navtop:hover {
-            font-weight: 400;
+            font-weight: 300;
+            color: ghostwhite;
         }
 
         .txt {
             color: ghostwhite;
-            font-weight: 100;
+            font-weight: 400;
             letter-spacing: 1px;
-            font-size: .8em;
+            font-size: 1em;
         }
 .bigger {
     width: 100%;
@@ -123,7 +135,13 @@
     color: #fe4164;
 }
 a { color: inherit; } 
-
+.border-col {
+    background-color: #303030;
+    color: ghostwhite;
+}
+.border-row:hover {
+    background-color: #424242;
+}
     </style>
 </head>
 <body>
@@ -131,8 +149,20 @@ a { color: inherit; }
 
         <!-- HEADER -->
         <div class="row headerow">
-            <div class="col-12 center">
+            <div class="col-12 col-md-3 col-lg-3 logoleft">
                 <img id="logo" class="logoimg clicker" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
+            </div>
+            <div class="col-12 col-md-6 col-lg-6 center">
+                <span id="menu" class="navtop robo clicker">Menu</span>&nbsp;&nbsp;
+                <span id="menu" class="navtop robo clicker">Roster</span>&nbsp;&nbsp;
+                <span id="menu" class="navtop robo clicker">Txs</span>&nbsp;&nbsp;
+                <span id="menu" class="navtop robo clicker">Staff</span>&nbsp;&nbsp;
+                <span id="menu" class="navtop robo clicker">Customer</span>&nbsp;&nbsp;
+                <span id="menu" class="navtop robo clicker">Stock</span>&nbsp;&nbsp;
+                <span id="menu" class="navtop robo clicker">Supply</span>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3 right">
+                <div id="menu" class="navtop robo clicker"><i class="fas fa-circle"></i></div>
             </div>
         </div>
 
@@ -142,15 +172,12 @@ a { color: inherit; }
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-12">
-                <span class="robo">Pending</span>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-6 border-col">
+                <span class="robo txt">PENDING</span>
             </div>
-        </div>
-        <div id="pendingdays">
-            <div class="row">
-                <div class="col-2">11/1</div>
-                <div class="col-">11/1</div>
+            <div class="col-12 col-md-6 col-lg-6 border-col">
+                <span class="robo txt">OPEN</span>
             </div>
         </div>
         
@@ -161,29 +188,55 @@ a { color: inherit; }
         </div>
 
         <div class="row justify-content-center">
-            <form id="userform" method="post">
-                <div class="col-12 center">
-                        <input autocomplete="off" name="user" id="user" type="number" maxlength="10" placeholder="Mobile"/>
-                </div>
-            </form>
-        </div>
-        <div class="row">
             <div class="col-12 center">
+                    <input autocomplete="off" name="user" id="user" type="text" placeholder="Username"/>
+            </div>
+            <div class="col-12 center">
+                    <input autocomplete="off" name="pword" id="pword" type="text" placeholder="Password"/>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-3 center">
+                <span id="register" class="robo redder clicker">REGISTER</span>
+            </div>
+            <div class="col-3 center">
                 <span id="login" class="robo greener clicker">LOGIN</span>
             </div>
+        </div>
+        <div class="row">
+            <div id="returner" class="col-12 center"></div>
         </div>
 
     </div>
 
     <script>
 
-        $("#login").click(function() {
+        $("#register").click(function() {
             var user = $("#user").val();
+            var pword = $("#pword").val();
             var formdata = new FormData();
             formdata.append("user", user);
-            var request = new XMLHttpRequest();
-            request.open("POST", "/login");
-            request.send(formdata);
+            formdata.append("pword", pword);
+
+            fetch("/register", {
+                method: "post",
+                body: formdata,
+            }).then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log("problem: "+response.Status);
+                        return;
+                    }
+
+                    response.text().then(function(text) {
+                        var ret = document.getElementById("returner");
+                        ret.innerHTML = text;
+                    });
+                }
+            )
+            .catch(function(err) {
+                console.log(err);
+            });
         });
         
         // $("#user").keyup(function() {

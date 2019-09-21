@@ -30,6 +30,8 @@ func main() {
 	http.HandleFunc("/", public)
 	http.HandleFunc("/boss", boss)
 	http.HandleFunc("/login", login)
+	http.HandleFunc("/menu", menu)
+	http.HandleFunc("/register", register)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -38,20 +40,42 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
-func login(w http.ResponseWriter, r *http.Request) {
-	a := r.FormValue("user")
-	log.Println(a)
-	if a == "" {
-		a = "Empty"
+func menu(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(`Helllllo`))
+}
+
+func register(w http.ResponseWriter, r *http.Request) {
+	auser := r.FormValue("user")
+	apword := r.FormValue("pword")
+	_, err := fs.Collection("people").Doc(auser).Get(context.Background())
+	if err == nil {
+		w.Write([]byte(`user already exists`))
+		return
 	}
-	peep := fs.Doc("people/when")
-	_, err := peep.Set(context.Background(), User{
-		Mobile: a,
+	wr, err := fs.Collection("people").Doc(auser).Set(context.Background(), map[string]interface{}{
+		"pword": apword,
 	})
 	if err != nil {
-		panic(err)
+		w.Write([]byte(`unable to register`))
+		return
 	}
+	log.Println(wr.UpdateTime)
+}
 
+func login(w http.ResponseWriter, r *http.Request) {
+	auser := r.FormValue("user")
+	apword := r.FormValue("pword")
+	dd, err := fs.Collection("people").Doc(auser).Get(context.Background())
+	if err != nil {
+		w.Write([]byte(`no such user`))
+		return
+	}
+	ddd := dd.Data()
+	if ddd["pword"] == apword {
+		w.Write([]byte(`correct pwd`))
+		return
+	}
+	w.Write([]byte(`incorrect password`))
 }
 
 func boss(w http.ResponseWriter, r *http.Request) {

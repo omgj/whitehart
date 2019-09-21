@@ -174,22 +174,11 @@ a { color: inherit; }
 
         <!-- MENU -->
         <div id="menuview">
-            <div class="numbody row justify-content-center">
-                <div class="col-12 col-md-10 col-lg-10 center menutypes">
-                    <span id="beer" class="menutypesitem">Beer</span>&nbsp;
-                    <span id="wine" class="menutypesitem">Wine</span>&nbsp;
-                    <span id="bottles" class="menutypesitem">Bottles</span>&nbsp;
-                    <span id="cans" class="menutypesitem">Cans</span>&nbsp;
-                    <span id="cocktails" class="menutypesitem">Cocktails</span>&nbsp;
-                    <span id="food" class="menutypesitem">Food</span>
+            <div class="row">
+                <div class="col-12">
+                    <span id="types" class="robo txt"></span>
                 </div>
             </div>
-            <div id="beerbody" class="row">beer</div>
-            <div id="winebody" class="row">wine</div>
-            <div id="bottlesbody" class="row">bottles</div>
-            <div id="cansbody" class="row">cans</div>
-            <div id="cocktailsbody" class="row">cocktails</div>
-            <div id="foodbody" class="row">food</div>
         </div>
         
         <!-- EVENTS -->
@@ -235,10 +224,20 @@ a { color: inherit; }
     });
 
     $("#menu").click(function() {
+        fetch("/menu")
+        .then(function(response) {
+            var typ = document.getElementById('types');
+            console.log(response);
+            typ.textContent = response.text();
+        })
+        .catch(function(error) {
+            console.log(err);
+        });
         $("#homeview").hide();
         $("#musicview").hide();
         $("#menuview").show();
         $("#eventsview").hide();
+
     });
 
     $("#events").click(function() {
