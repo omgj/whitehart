@@ -63,7 +63,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 	apword := r.FormValue("pword")
 	dd, err := fs.Collection("people").Doc(auser).Get(context.Background())
 	if err != nil {
-		w.Write([]byte(`nouser`))
+		w.Write([]byte(`<span class="robo txt">no user</span>`))
 		return
 	}
 	ddd := dd.Data()
@@ -75,26 +75,26 @@ func login(w http.ResponseWriter, r *http.Request) {
 			MaxAge: 1000,
 		}
 		http.SetCookie(w, &aa)
-		w.Write([]byte(`done`))
+		http.Redirect(w, r, "/new", 302)
 		return
 	}
-	w.Write([]byte(`pwrong`))
+	w.Write([]byte(`<span class="robo txt">p wrong</span>`))
 }
 
 func boss(w http.ResponseWriter, r *http.Request) {
-	cookies := r.Cookies()
-	var cuser string
-	for _, c := range cookies {
-		cuser = c.Value
-	}
-	log.Println(cuser)
-	aa := http.Cookie{
-		Name: "user",
-		Value: "yes",
-		Path: "/",
-		MaxAge: 1000,
-	}
-	http.SetCookie(w, &aa)
+	// cookies := r.Cookies()
+	// var cuser string
+	// for _, c := range cookies {
+	// 	cuser = c.Value
+	// }
+	// log.Println(cuser)
+	// aa := http.Cookie{
+	// 	Name: "user",
+	// 	Value: "yes",
+	// 	Path: "/",
+	// 	MaxAge: 1000,
+	// }
+	// http.SetCookie(w, &aa)
 	a, _ := ioutil.ReadFile("boss.html")
 	io.WriteString(w, string(a))
 }
