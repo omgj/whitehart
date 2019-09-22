@@ -30,7 +30,6 @@ func main() {
 	http.HandleFunc("/", public)
 	http.HandleFunc("/boss", boss)
 	http.HandleFunc("/login", login)
-	http.HandleFunc("/menu", menu)
 	http.HandleFunc("/register", register)
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -38,10 +37,6 @@ func main() {
 	}
 	log.Println("listening on 8080")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-}
-
-func menu(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(`Helllllo`))
 }
 
 func register(w http.ResponseWriter, r *http.Request) {
@@ -54,6 +49,7 @@ func register(w http.ResponseWriter, r *http.Request) {
 	}
 	wr, err := fs.Collection("people").Doc(auser).Set(context.Background(), map[string]interface{}{
 		"pword": apword,
+		"ipaddr": r.RemoteAddr,
 	})
 	if err != nil {
 		w.Write([]byte(`<span class="robo txt">unable to register</span>`))
@@ -67,18 +63,38 @@ func login(w http.ResponseWriter, r *http.Request) {
 	apword := r.FormValue("pword")
 	dd, err := fs.Collection("people").Doc(auser).Get(context.Background())
 	if err != nil {
-		w.Write([]byte(`<span class="robo txt">no such user</span>`))
+		w.Write([]byte(`nouser`))
 		return
 	}
 	ddd := dd.Data()
 	if ddd["pword"] == apword {
-		w.Write([]byte(`<span class="robo txt">correct pwd</span>`))
+		aa := http.Cookie{
+			Name: "whitehart",
+			Value: auser,
+			Path: "/",
+			MaxAge: 1000,
+		}
+		http.SetCookie(w, &aa)
+		w.Write([]byte(`done`))
 		return
 	}
-	w.Write([]byte(`<span class="robo txt">incorrect password</span>`))
+	w.Write([]byte(`pwrong`))
 }
 
 func boss(w http.ResponseWriter, r *http.Request) {
+	cookies := r.Cookies()
+	var cuser string
+	for _, c := range cookies {
+		cuser = c.Value
+	}
+	log.Println(cuser)
+	aa := http.Cookie{
+		Name: "user",
+		Value: "yes",
+		Path: "/",
+		MaxAge: 1000,
+	}
+	http.SetCookie(w, &aa)
 	a, _ := ioutil.ReadFile("boss.html")
 	io.WriteString(w, string(a))
 }
