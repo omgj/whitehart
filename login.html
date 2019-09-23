@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Whitehart</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/f34ab3dac3.js"></script>
+
+    <style>
+        body {
+            background-color: #212121;
+        }
+        .left {
+            text-align: left;
+        }
+        .center {
+            text-align: center;
+        }
+        .right {
+            text-align: right;
+        }
+        *:focus {
+            outline: none;
+        }
+        input {
+            background-color: #222;
+            font-weight: 100;
+            color: ghostwhite;
+            border: none;
+            letter-spacing: 1.3px;
+        }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            margin: 0; 
+        }
+        .redder {
+            color: #E57373;
+            font-size: .8em;
+    letter-spacing: 1.4px;
+    font-weight: 100;
+        }
+        .greener {
+            color: #81C784;
+            font-size: .8em;
+    letter-spacing: 1.4px;
+    font-weight: 100;
+        }
+        .redder:hover, .greener:hover {
+            font-weight: 400;
+        }
+        .clicker {
+            cursor: pointer;
+        }
+        .robo {
+            font-family: 'Roboto', sans-serif;
+        }
+        .uname {
+            color: #777;
+            font-weight: 100;
+            letter-spacing: 1px;
+            font-size: .7em;
+        }
+
+.logoimg {
+    height: 13px;
+}
+
+  /* @media (min-width: 992px) { 
+    .logoimg {height: 10px;}
+    .logoleft {
+        text-align: left;
+    }
+  } */
+        .txt {
+            color: ghostwhite;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-size: .7em;
+        }
+</style>
+</head>
+<body>
+    <div class="container-fluid">
+
+        <!-- HEADER -->
+        <div class="row headerow">
+            <div class="col-11 left">
+                <img id="logo" class="logoimg clicker" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
+                <input autocomplete="off" type="text" placeholder="...."/>
+            </div>
+            <div class="col-1 right">
+                <div id="logintop" class="navtop robo clicker"><i class="fas fa-circle"></i></div>
+            </div>
+        </div>
+
+        <div id="loginbody">
+            <div class="row">
+                <div class="col-12">
+                        <input autocomplete="off" name="user" id="user" type="text" placeholder="Username"/>
+                </div>
+                <div class="col-12">
+                        <input autocomplete="off" name="pword" id="pword" type="text" placeholder="Password"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 col-md-1 col-lg-1">
+                    <span id="register" class="robo redder clicker">REGISTER</span>
+                </div>
+                <div class="col-3 col-md-1 col-lg-1">
+                    <span id="login" class="robo greener clicker">LOGIN</span>
+                </div>
+            </div>
+            <div class="row">
+                <div id="returner" class="col-12 center"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+
+        $("#logo").click(function() {
+            $("#loginbody").hide();
+            $("#bignav").show();
+        });
+
+
+        $("#logintop").click(function() {
+            $("#bignav").hide();
+            $("#loginbody").show();
+        });
+
+        $("#register").click(function() {
+            var user = $("#user").val();
+            var pword = $("#pword").val();
+            var formdata = new FormData();
+            formdata.append("user", user);
+            formdata.append("pword", pword);
+
+            fetch("/register", {
+                method: "post",
+                body: formdata,
+            }).then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log("problem: "+response.Status);
+                        return;
+                    }
+
+                    response.text().then(function(text) {
+                        var ret = document.getElementById("returner");
+                        ret.innerHTML = text;
+                        location.reload();
+                    });
+                }
+            )
+            .catch(function(err) {
+                console.log(err);
+            });
+        });
+
+        $("#login").click(function() {
+            var user = $("#user").val();
+            var pword = $("#pword").val();
+            var formdata = new FormData();
+            formdata.append("user", user);
+            formdata.append("pword", pword);
+
+            fetch("/login", {
+                method: "post",
+                body: formdata,
+            }).then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log("problem: "+response.Status);
+                        return;
+                    }
+
+                    response.text().then(function(text) {
+                        if (text == "uno") {
+                            console.log("no user");
+                        }
+                        if (text == "pno") {
+                            conole.log("wrong password");
+                        }
+                        if (text == "ok") {
+                            location.reload();
+                        }
+                    });
+                }
+            )
+            .catch(function(err) {
+                console.log(err);
+            });
+        });
+        
+    </script>
+</body>
+</html>

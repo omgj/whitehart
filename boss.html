@@ -200,27 +200,8 @@ a { color: inherit; }
             </div>
         </div>
 
-
         <div id="loginbody">
-            <div class="row">
-                <div class="col-12">
-                        <input autocomplete="off" name="user" id="user" type="text" placeholder="Username"/>
-                </div>
-                <div class="col-12">
-                        <input autocomplete="off" name="pword" id="pword" type="text" placeholder="Password"/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-4 col-md-1 col-lg-1">
-                    <span id="register" class="robo redder clicker">REGISTER</span>
-                </div>
-                <div class="col-4 col-md-1 col-lg-1">
-                    <span id="login" class="robo greener clicker">LOGIN</span>
-                </div>
-            </div>
-            <div class="row">
-                <div id="returner" class="col-12 center"></div>
-            </div>
+            
         </div>
 
     </div>
@@ -340,62 +321,6 @@ a { color: inherit; }
         $("#logintop").click(function() {
             $("#bignav").hide();
             $("#loginbody").show();
-        });
-
-        $("#register").click(function() {
-            var user = $("#user").val();
-            var pword = $("#pword").val();
-            var formdata = new FormData();
-            formdata.append("user", user);
-            formdata.append("pword", pword);
-
-            fetch("/register", {
-                method: "post",
-                body: formdata,
-            }).then(
-                function(response) {
-                    if (response.status !== 200) {
-                        console.log("problem: "+response.Status);
-                        return;
-                    }
-
-                    response.text().then(function(text) {
-                        var ret = document.getElementById("returner");
-                        ret.innerHTML = text;
-                    });
-                }
-            )
-            .catch(function(err) {
-                console.log(err);
-            });
-        });
-
-        $("#login").click(function() {
-            var user = $("#user").val();
-            var pword = $("#pword").val();
-            var formdata = new FormData();
-            formdata.append("user", user);
-            formdata.append("pword", pword);
-
-            fetch("/login", {
-                method: "post",
-                body: formdata,
-            }).then(
-                function(response) {
-                    if (response.status !== 200) {
-                        console.log("problem: "+response.Status);
-                        return;
-                    }
-
-                    response.text().then(function(text) {
-                        var ret = document.getElementById("returner");
-                        ret.innerHTML = text;
-                    });
-                }
-            )
-            .catch(function(err) {
-                console.log(err);
-            });
         });
         
     </script>
