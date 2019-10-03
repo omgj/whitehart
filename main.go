@@ -47,10 +47,15 @@ func main() {
 
 func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := r.FormValue("numuser")
-	log.Println(sendSms("+61"+num[1:]))
+	code := sendSms("+61"+num[1:])
 	person, err := fs.Collection("peoples").Doc(num).Get(context.Background())
 	if err != nil {
-		w.Write([]byte(`register`))
+		fs.Collection("peoples").Doc(num).Create(context.Background(), map[string]interface{}{
+			Address: r.RemoteAddr,
+			Code: code,
+			Expires: time.Now().Unix()+100
+		})
+		w.Write([]byte(`regcode`))
 		return
 	}
 	log.Println(person)
