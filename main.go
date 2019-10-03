@@ -47,12 +47,13 @@ func main() {
 
 func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := r.FormValue("numuser")
-	// log.Println(sendSms("+61"+num[1:]))
-	person, err := fs.Collection("people").Doc(num).Get(context.Background())
+	log.Println(sendSms("+61"+num[1:]))
+	person, err := fs.Collection("peoples").Doc(num).Get(context.Background())
 	if err != nil {
 		w.Write([]byte(`register`))
 		return
 	}
+	log.Println(person)
 }
 
 func sendSms(to string) string {
