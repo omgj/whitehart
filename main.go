@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
@@ -10,10 +9,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"strconv"
-	"math/rand"
-	"encoding/json"
-	"os"
 )
 
 var fs *firestore.Client
