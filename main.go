@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"context"
@@ -9,6 +10,10 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"os"
+	"math/rand"
+	"encoding/json"
+	"strconv"
 )
 
 var fs *firestore.Client
@@ -43,7 +48,7 @@ func main() {
 func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := r.FormValue("numuser")
 	// log.Println(sendSms("+61"+num[1:]))
-	person, err := fs.Collection("people").Doc(numuser).Get(context.Background())
+	person, err := fs.Collection("people").Doc(num).Get(context.Background())
 	if err != nil {
 		w.Write([]byte(`register`))
 		return
