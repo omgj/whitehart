@@ -87,6 +87,13 @@
             letter-spacing: 1px;
             font-size: .7em;
         }
+
+    #loginid {
+        width: 100%;
+    }
+    #logreg, #reglog {
+        font-size: .7em;
+    }
 </style>
 </head>
 <body>
@@ -103,21 +110,58 @@
             </div>
         </div>
 
-        <div id="loginbody">
-            <div class="row">
-                <div class="col-12">
-                        <input autocomplete="off" name="user" id="user" type="text" placeholder="Username"/>
+        <div id="authbody">
+            <div id="regbody">
+                <div class="row justify-content-center">
+                    <div class="col-6 col-md-2 col-lg-2">
+                        <input autocomplete="off" name="user" id="regu" type="text" placeholder="Username"/>
+                    </div>
+                    <div class="col-6 col-md-2 col-lg-2">
+                        <input autocomplete="off" name="pword" id="regp" type="text" placeholder="Password"/>
+                    </div>
                 </div>
-                <div class="col-12">
-                        <input autocomplete="off" name="pword" id="pword" type="text" placeholder="Password"/>
+                <div class="row justify-content-center">
+                    <div class="col-6 col-md-2 col-lg-2">
+                            <input autocomplete="off" name="mbile" id="mbile" type="text" maxlength="10" placeholder="Mobile"/>
+                    </div>
+                    <div class="col-6 col-md-2 col-lg-2" id="regcsendbody">
+                        <span id="regcsend" class="robo greener clicker">SEND CODE</span>
+                    </div>
+                    <div class="col-6 col-md-3 col-lg-2" id="regcbody">
+                            <input autocomplete="off" name="regcode" id="regcode" type="text" maxlength="6" placeholder="Code"/>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-3 col-md-2 col-lg-1">
+                        <span id="reglog" class="robo redder clicker">LOGIN</span>
+                    </div>
+                    <div class="col-3 col-md-1 col-lg-1">
+                        <span id="regsubmit" class="robo greener clicker">REGISTER</span>
+                    </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-3 col-md-1 col-lg-1">
-                    <span id="register" class="robo redder clicker">REGISTER</span>
+            <div id="logbody">
+                <div class="row justify-content-center">
+                    <div class="col-6 col-md-2 col-lg-2">
+                            <input autocomplete="off" name="logu" id="logu" type="text" maxlength="15" placeholder="Uname / Mobile"/>
+                    </div>
+                    <div class="col-6 col-md-2 col-lg-2" id="logpbody">
+                            <input autocomplete="off" name="logp" id="logp" type="text" placeholder="Password"/>
+                    </div>
+                    <div class="col-6 col-md-2 col-lg-2" id="logcbody">
+                            <input autocomplete="off" name="logc" id="logc" type="text" placeholder="Code"/>
+                    </div>
+                    <div class="col-6 col-md-2 col-lg-2" id="logcsendbody">
+                        <span id="logcsend" class="robo greener clicker">SEND CODE</span>
+                    </div>
                 </div>
-                <div class="col-3 col-md-1 col-lg-1">
-                    <span id="login" class="robo greener clicker">LOGIN</span>
+                <div class="row justify-content-center">
+                    <div class="col-3 col-md-1 col-lg-1">
+                        <span id="logreg" class="robo redder clicker">REGISTER</span>
+                    </div>
+                    <div class="col-3 col-md-1 col-lg-1">
+                        <span id="logd" class="robo greener clicker">LOGIN</span>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -129,23 +173,91 @@
 
     <script>
 
+        $("#regbody").hide();
+        $("#logpbody").hide();
+        $("#logcbody").hide();
+        $("#logcsendbody").hide();
+        $("#regcbody").hide();
+
+        $("#logreg").click(function() {
+            $("#regbody").show();
+            $("#logbody").hide();
+        });
+
+        $("#reglog").click(function() {
+            $("#logbody").show();
+            $("#reglog").hide();
+        });
+
+        $("#regb").hide();
+        $("#logc").hide();
+        $("#logd").hide();
+
+        $("#logincodesend").click(function() {
+            $("#logincodesend").hide();
+            $("#logincode").show();
+            var fdata = new FormData();
+            var mbile = $("#user").val();
+            fdata.append("mbile", mbile)
+            fetch("/mbile", {
+                method: "post",
+                body: fdata,
+            }).then(
+                function(response) {
+                    if (response.status !== 200) {
+                        consol.log(response.Status);
+                        return;
+                    }
+
+                    response.text().then(function(text) {
+                        console.log(text);
+                    });
+                }
+            )
+        });
+
+        $("#logincodesend").hide();
+        $("#loginid").keyup(function() {
+            var a = $("#loginid").val();
+            if (a.includes("04")) {
+                $("#logincodesend").show();
+                $("#logincode").hide();
+                $("#loginpword").hide();
+                return
+            }
+            $("#loginpword").show();
+            $("#logincode").hide();
+            $("#logincodesend").hide();
+        });
+
+        $("#loginpword").hide();
+        $("#logincode").hide();
+        $("#registerbody").hide();
         $("#logo").click(function() {
-            $("#loginbody").hide();
+            $("#authbody").hide();
             $("#bignav").show();
         });
 
 
         $("#logintop").click(function() {
             $("#bignav").hide();
-            $("#loginbody").show();
+            $("#authbody").show();
         });
 
         $("#register").click(function() {
+            $("#registerbody").show();
+            $("#loginbody").hide();
             var user = $("#user").val();
             var pword = $("#pword").val();
+            var mobile = $("#mobile");
             var formdata = new FormData();
             formdata.append("user", user);
             formdata.append("pword", pword);
+
+            if ((user == "") || (pword == "") || (mobile == "")) {
+                console.log("enter something");
+                return
+            }
 
             fetch("/register", {
                 method: "post",
@@ -170,11 +282,19 @@
         });
 
         $("#login").click(function() {
-            var user = $("#user").val();
-            var pword = $("#pword").val();
+            $("#registerbody").hide();
+            $("#loginbody").show();
+            var user = $("#loginid").val();
+            var pword = $("#loginpword").val();
+            var code = $("#logincode").val();
             var formdata = new FormData();
-            formdata.append("user", user);
-            formdata.append("pword", pword);
+            if (user.includes("04") && (user.length == 10)) {
+                formdata.append("user", user);
+            }
+            if ((user != "") && (pword != "")) {
+                formdata.append("pword", pword);
+            }
+
 
             fetch("/login", {
                 method: "post",
@@ -191,7 +311,7 @@
                             console.log("no user");
                         }
                         if (text == "pno") {
-                            conole.log("wrong password");
+                            console.log("wrong password");
                         }
                         if (text == "ok") {
                             location.reload();

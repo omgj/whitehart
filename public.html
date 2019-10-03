@@ -10,6 +10,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f34ab3dac3.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
 
     <style>
         body {
@@ -32,6 +33,10 @@
             font-weight: 100;
             color: ghostwhite;
             border: none;
+            font-family: 'Roboto', sans-serif;
+            width: 100%;
+            font-size: .8em;
+            letter-spacing: .5px;
         }
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
@@ -59,10 +64,6 @@
             font-size: .9em;
             letter-spacing: 1px;
         }
-        .menutypes {
-            padding-left: 5px !important;
-            padding-right: 5px !important;
-        }
         .uname {
             color: #777;
             font-weight: 100;
@@ -70,23 +71,39 @@
             font-size: .7em;
         }
         @media (max-width: 544px) {
-.logoimg {
-    height: 31px;
+#logo {
+    height: 37px;
     text-align: center;
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 }
 
+#instagram {
+    font-size: 20px;
+}
+#facebook {
+    font-size: 20px;
+}
 @media (min-width: 544px) {  
-    .logoimg {height: 20px;}
+    #logo {
+        height: 20px;
+        margin-bottom: 5px;
+    }
   }
 
   @media (min-width: 768px) {  
-    .logoimg {height: 15px;}
+    #logo {
+        height: 15px;
+        margin-bottom: 5px;
+    }
   }
 
   @media (min-width: 992px) { 
-    .logoimg {height: 10px;}
+    #logo {
+        height: 10px;
+        margin-bottom: 5px;
+    }
 
   }
         .cart {
@@ -114,29 +131,26 @@
 .bigger {
     width: 100%;
 }
-.picrow {
-    padding-left: 0px;
-    padding-right: 0px;
-}
 .headerow {
     margin-bottom: 6px;
     margin-top: 4px;
 }
 .aboutxt {
-    font-size: .9em;
+    font-size: .8em;
     color: ghostwhite;
-    font-weight: 300;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+.aboutxt:hover {
+    color: #616161;
 }
 .fa-facebook:hover {
     color: #3b5998;
 }
 a { color: inherit; } 
-.fa-instagram:hover {
-    color: #fe4164;
-}
 a:hover {
     text-decoration: none;
-    color: #999;
+    color: #666;
 }
 .imgmain {
     width: 100%;
@@ -145,6 +159,107 @@ a:hover {
     padding-left: 0px;
     padding-right: 0px;
 }
+#log {
+            color: ghostwhite;
+            font-weight: 300;
+            letter-spacing: 2px;
+            font-size: .8em;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+}
+#loginfo {
+    color: #818181;
+    font-weight: 100;
+}
+.underpwd {
+    font-size: .5em;
+    color: #616161;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+.unameerr {
+    font-size: .6em;
+    color: #ef9a9a;
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+}
+.regbut {
+    color: #ef9a9a;
+    font-size: .7em;
+    font-weight: 100;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+.regbut:hover {
+    font-weight: 400;
+    color: #e53935;
+}
+.logbut:hover {
+    font-weight: 400;
+    color: #388e3c;
+}
+.logbut {
+    color: #81c784;
+    font-size: .7em;
+    font-weight: 100;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+.txtbut {
+    color: #414141;
+    font-size: .7em;
+    font-weight: 100;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+.txtbut:hover {
+    font-weight: 400;
+    color: #666;
+}
+.active {
+    color: #777;
+    font-weight: 400;
+}
+.authblock {
+    margin-bottom: 15px;
+}
+.authblock:hover {
+    border-left: 1px solid #555;
+}
+.authselected {
+    border-left: 1px solid #555;
+}
+#sendcode {
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+    font-size: .8em;
+    color: #888;
+    padding-top: 8px;
+    cursor: pointer;
+}
+#sendcode:hover {
+    color: #81c784;
+}
+#userline {
+    border-left: 1px solid #313131;
+    margin-bottom: 10px;
+}
+#regutxt {
+    color: #515151;
+}
+#regptxt {
+    color: #515151;
+}
+#pline {
+    border-left: 1px solid #313131;
+}
+#regp::placeholder {
+    color: #414141;
+}
+#regu::placeholder {
+    color: #414141;
+}
     </style>
 </head>
 <body>
@@ -152,22 +267,54 @@ a:hover {
 
         <!-- HEADER -->
         <div class="row headerow">
+            <div id="barrer" class="col-12 center">
+                <img id="logo" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
+            </div>
+            <div class="col-12 center aboutxt">
+                <a href="https://www.google.com/maps/search/?api=1&query=-37.812971, 144.961936&query_place_id=ChIJDfZCRbVC1moR9iR2iOya1Ig">22 Whitehart Lane, 3000</a>
+            </div>
             <div class="col-12 center">
-                <img id="logo" class="logoimg clicker" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
+                <span id="instagram" class="navtop robo clicker"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                <span id="facebook" class="navtop robo clicker"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>&nbsp;&nbsp;
             </div>
             <div class="col-12 center">
                 <span id="menu" class="navtop robo clicker">MENU</span>&nbsp;&nbsp;
                 <span id="music" class="navtop robo clicker">MUSIC</span>&nbsp;&nbsp;
                 <span id="events" class="navtop robo clicker">EVENTS</span>&nbsp;&nbsp;
-                <span id="instagram" class="navtop robo clicker"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                <span id="facebook" class="navtop robo clicker"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
+                <span id="log" class="navtop robo clicker"><i id="something" class="far fa-circle"></i></span>
             </div>
         </div>
 
-        <!-- HOME -->
-        <div id="homebody">
+        <div id="login">
+            <div class="row justify-content-center">
+                <div id="userline" class="col-10 col-md-4 col-lg-3">
+                    <input id="numuser" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />
+                    <div id="regutxt" class="underpwd">NUMBER</div>
+                </div>
+            </div>
+            <div id="ptxt" class="row justify-content-center">
+                <div class="col-12 center">
+                    <span id="txtbut" class="txtbut">TXT A PASSWORD</span>
+                </div>
+            </div>
+            <div id="pcontainer" class="row justify-content-center">
+                <div id="pline" class="col-10 col-md-4 col-lg-3">
+                    <input id="regp" type="password" autocomplete="off" placeholder="shhhh" maxlength="10" />
+                    <div id="regptxt" class="underpwd">PASSWORD</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 center">
+                    <span class="regbut">REGISTER</span>&nbsp;&nbsp;&nbsp;
+                    <span id="loginbut" class="logbut">LOGIN</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="pub">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 center">
+                    
                     <p class="txt robo center">The white hart has always been a creature of myth and legend.</p>
 
                     <p class="txt robo center">The ancient Celts saw it as a harbinger of doom. The French believed that to harm a white hart meant to be eternally cursed with the pain of unrequited love. The Scots saw it as a symbol of purity, redemption and good fortune.</p>
@@ -178,7 +325,6 @@ a:hover {
                         
                         <p class="txt robo center">Melbournes CBD now has a WHITE HART.</p>
                         
-                        <p class="txt robo center"><a href="https://www.google.com/maps/search/?api=1&query=-37.812971, 144.961936&query_place_id=ChIJDfZCRbVC1moR9iR2iOya1Ig"><i class="fas fa-map-pin"></i> 22 Whitehart Lane, 3000</a></p>
                 </div>
             </div>
             <div class="row">
@@ -196,20 +342,76 @@ a:hover {
                 </div>
             </div>
         </div>
-
-        <!-- MENU -->
-        <div id="menubody"></div>
-        
-        <!-- EVENTS -->
-        <div id="eventsbody"></div>
-        
-        <!-- MUSIC -->
-        <div id="musicbody"></div>
-
         
     </div>
 
     <script>
+
+        $("#pcontainer").hide();
+        $("#txtbut").click(function() {
+            var formdata = new FormData();
+            var num = $("#numuser").val();
+            if (!num.includes("04") && (!num.length == 10)) {
+                return;
+            }
+
+            formdata.append("numuser", num);
+            fetch("/txtpwd", {
+                method: "post",
+                body: formdata,
+            }).then(
+                function(response) {
+                    if (response.status !== 200) {
+                        console.log("problem: "+response.Status);
+                        return;
+                    }
+
+                    response.text().then(function(text) {
+                        if (text == "login") {
+                            $("#loginbut").show();
+                            console.log("login");
+                        }
+                        if (text == "register") {
+                            $("#regbut").show();
+                            console.log("register");
+                        }
+                    });
+                }
+            )
+            .catch(function(err) {
+                console.log(err);
+            });
+        });
+        $("#something").hover(function() {
+        });
+        $("#something").mouseenter(function() {
+            $("#something").removeClass("far");
+            $("#something").addClass("fas");
+        }).mouseleave(function() {
+            $("#something").removeClass("fas");
+            $("#something").addClass("far");
+        });
+
+        $("#regpword").keyup(function() {
+            $("#regpwordc").css("border-left", "1px solid #f06292")
+        });
+
+        $("#reguname").keyup(function() {
+                $("#unameblock").css("border-left","1px solid #64b5f6");
+                $("#unameblock").css("background-color","#bbdefb");
+        });
+
+        $("#login").hide();
+        $("#loginfo").hide();
+        $("#log").mouseover(function() {
+            $("#loginfo").show();
+        }).mouseout(function() {
+            $("#loginfo").hide();
+        });
+        $("#log").click(function() {
+            $("#pub").hide();
+            $("#login").show();
+        });
 
     $("#menubody").hide();
     $("#musicbody").hide();
