@@ -72,10 +72,10 @@
         }
         @media (max-width: 544px) {
 #logo {
-    height: 37px;
+    height: 30px;
     text-align: center;
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 }
 
@@ -88,21 +88,21 @@
 @media (min-width: 544px) {  
     #logo {
         height: 20px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
   }
 
   @media (min-width: 768px) {  
     #logo {
         height: 15px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
   }
 
   @media (min-width: 992px) { 
     #logo {
         height: 10px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
   }
@@ -288,7 +288,7 @@ a:hover {
         <div id="login">
             <div class="row justify-content-center">
                 <div id="userline" class="col-10 col-md-4 col-lg-3">
-                    <input id="numuser" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />
+                    <input id="numuser" type="number" autocomplete="off" placeholder="0480019099" maxlength="10" />
                     <div id="regutxt" class="underpwd">NUMBER</div>
                 </div>
             </div>
@@ -369,7 +369,7 @@ a:hover {
                     }
 
                     response.text().then(function(text) {
-                        if (text == "login") {
+                        if (text == "logcode") {
                             $("#pcontainer").show();
                             $("#loginbut").show();
                             console.log("login");
