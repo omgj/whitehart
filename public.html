@@ -71,6 +71,9 @@
             font-size: .7em;
         }
         @media (max-width: 544px) {
+            #numuser {
+                font-size: 25px;
+            }
 #logo {
     height: 30px;
     text-align: center;
@@ -370,11 +373,13 @@ a:hover {
 
                     response.text().then(function(text) {
                         if (text == "logcode") {
+                            $("#ptxt").hide();
                             $("#pcontainer").show();
                             $("#loginbut").show();
                             console.log("login");
                         }
                         if (text == "regcode") {
+                            $("#ptxt").hide();
                             $("#pcontainer").show();
                             $("#regbut").show();
                             console.log("register");
