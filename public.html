@@ -35,8 +35,8 @@
             border: none;
             font-family: 'Roboto', sans-serif;
             width: 100%;
-            font-size: .8em;
-            letter-spacing: .5px;
+            font-size: 1em;
+            letter-spacing: 1.5px;
         }
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
@@ -70,59 +70,12 @@
             letter-spacing: 1px;
             font-size: .7em;
         }
-        @media (max-width: 544px) {
-            #numuser {
-                font-size: 25px;
-            }
-#logo {
-    height: 30px;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 10px;
-}
-}
 
-#instagram {
-    font-size: 20px;
-}
-#facebook {
-    font-size: 20px;
-}
-@media (min-width: 544px) {  
-    #logo {
-        height: 20px;
-        margin-bottom: 10px;
-    }
-  }
-
-  @media (min-width: 768px) {  
-    #logo {
-        height: 15px;
-        margin-bottom: 10px;
-    }
-  }
-
-  @media (min-width: 992px) { 
-    #logo {
-        height: 10px;
-        margin-bottom: 10px;
-    }
-
-  }
         .cart {
             color: #777;
             font-weight: 100;
             letter-spacing: 2px;
             font-size: .7em;
-        }
-        .navtop {
-            color: ghostwhite;
-            font-weight: 300;
-            letter-spacing: 2px;
-            font-size: .8em;
-        }
-        .navtop:hover {
-            font-weight: 400;
         }
 
         .txt {
@@ -138,22 +91,11 @@
     margin-bottom: 6px;
     margin-top: 4px;
 }
-.aboutxt {
-    font-size: .8em;
-    color: ghostwhite;
-    font-weight: 100;
-    letter-spacing: 1px;
-}
-.aboutxt:hover {
-    color: #616161;
-}
-.fa-facebook:hover {
-    color: #3b5998;
-}
 a { color: inherit; } 
 a:hover {
     text-decoration: none;
-    color: #666;
+    color: ghostwhite;
+    font-weight: 400;
 }
 .imgmain {
     width: 100%;
@@ -162,25 +104,12 @@ a:hover {
     padding-left: 0px;
     padding-right: 0px;
 }
-#log {
-            color: ghostwhite;
-            font-weight: 300;
-            letter-spacing: 2px;
-            font-size: .8em;
-            cursor: pointer;
-            font-family: 'Courier New', Courier, monospace;
-}
+
 #loginfo {
     color: #818181;
     font-weight: 100;
 }
-.underpwd {
-    font-size: .5em;
-    color: #616161;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
+
 .unameerr {
     font-size: .6em;
     color: #ef9a9a;
@@ -244,18 +173,11 @@ a:hover {
 #sendcode:hover {
     color: #81c784;
 }
-#userline {
-    border-left: 1px solid #313131;
-    margin-bottom: 10px;
-}
 #regutxt {
     color: #515151;
 }
 #regptxt {
     color: #515151;
-}
-#pline {
-    border-left: 1px solid #313131;
 }
 #regp::placeholder {
     color: #414141;
@@ -263,58 +185,117 @@ a:hover {
 #regu::placeholder {
     color: #414141;
 }
+
+#logo {
+    height: 20px;
+    text-align: left;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.logbc {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.logb {
+    color: #81c784;
+    padding: 10px;
+    font-weight: 100;
+    letter-spacing: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+.logb:hover {
+    font-weight: 400;
+}
+.log {
+            color: ghostwhite;
+            font-weight: 100;
+            letter-spacing: 2px;
+            font-size: .8em;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+}
+.log:hover {
+    font-weight: 300;
+}
+
+.underpwd {
+    font-size: .5em;
+    color: #616161 !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+.underpwdactive {
+    font-size: .5em;
+    color: #999999 !important;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+        .navtop:hover {
+            font-weight: 400;
+        }
+#numuser::placeholder {
+    color: #414141;
+}
+  @media (max-width: 500px) { 
+    #menu {
+        font-size: 5px;
+    }
+
+  }
+  #instagram {
+    font-size: 20px;
+}
+#facebook {
+    font-size: 20px;
+}
     </style>
 </head>
 <body>
     <div class="container-fluid">
 
         <!-- HEADER -->
-        <div class="row headerow">
-            <div id="barrer" class="col-12 center">
+        <div class="row">
+            <div class="col-12 center">
                 <img id="logo" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
             </div>
-            <div class="col-12 center aboutxt">
-                <a href="https://www.google.com/maps/search/?api=1&query=-37.812971, 144.961936&query_place_id=ChIJDfZCRbVC1moR9iR2iOya1Ig">22 Whitehart Lane, 3000</a>
+            <div class="col-12 center">
+                <a class="log" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">22 Whitehart Lane, Melbourne CBD 3000</a>
             </div>
             <div class="col-12 center">
-                <span id="instagram" class="navtop robo clicker"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                <span id="facebook" class="navtop robo clicker"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>&nbsp;&nbsp;
-            </div>
-            <div class="col-12 center">
-                <span id="menu" class="navtop robo clicker">MENU</span>&nbsp;&nbsp;
-                <span id="music" class="navtop robo clicker">MUSIC</span>&nbsp;&nbsp;
-                <span id="events" class="navtop robo clicker">EVENTS</span>&nbsp;&nbsp;
-                <span id="log" class="navtop robo clicker"><i id="something" class="far fa-circle"></i></span>
+                <span id="menu" class="log">MENU</span>&nbsp;&nbsp;
+                <span id="music" class="log">MUSIC</span>&nbsp;&nbsp;
+                <span id="events" class="log">EVENTS</span>
             </div>
         </div>
-
-        <div id="login">
-            <div class="row justify-content-center">
-                <div id="userline" class="col-10 col-md-4 col-lg-3">
-                    <input id="numuser" type="number" autocomplete="off" placeholder="0480019099" maxlength="10" />
-                    <div id="regutxt" class="underpwd">NUMBER</div>
-                </div>
-            </div>
-            <div id="ptxt" class="row justify-content-center">
-                <div class="col-12 center">
-                    <span id="txtbut" class="txtbut">TXT A PASSWORD</span>
-                </div>
-            </div>
-            <div id="pcontainer" class="row justify-content-center">
-                <div id="pline" class="col-10 col-md-4 col-lg-3">
-                    <input id="regp" type="password" autocomplete="off" placeholder="shhhh" maxlength="10" />
-                    <div id="regptxt" class="underpwd">PASSWORD</div>
-                </div>
-            </div>
+        <div id="menubody">
             <div class="row">
-                <div class="col-12 center">
-                    <span class="regbut">REGISTER</span>&nbsp;&nbsp;&nbsp;
-                    <span id="loginbut" class="logbut">LOGIN</span>
+                <div class="col-12">
+                    <span class="log">Menu</span>
                 </div>
             </div>
         </div>
-
+        <div id="musicbody">
+            <div class="row">
+                <div class="col-12">
+                    <span class="log">music</span>
+                </div>
+            </div>
+        </div>
+        <div id="eventsbody">
+            <div class="row">
+                <div class="col-12">
+                    <span class="log">events</span>
+                </div>
+            </div>
+        </div>
         <div id="pub">
+            <div class="row">
+                <div class="col-12">&nbsp;</div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 center">
                     
@@ -326,23 +307,35 @@ a:hover {
                         
                         <p class="txt robo center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p>
                         
-                        <p class="txt robo center">Melbournes CBD now has a WHITE HART.</p>
-                        
+                        <p class="txt robo center">Melbournes CBD now has a WHITE HART.</p>  
+                </div>
+                <div class="col-12 center">
+                    <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                    <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-6 col-md-6 imgcol">
-                    <img class="imgmain" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="whitehart">
+                <div class="col-12">&nbsp;</div>
+            </div>
+            <div id="login">
+                <div class="row justify-content-center">
+                    <div id="numc" class="col-6 col-md-3 col-lg-2 right">
+                        <input id="numuser" type="text" autocomplete="off" class="right" placeholder="0480019099" maxlength="10" />
+                        <div id="regutxt" class="underpwd">MOBILE NUMBER</div>
+                    </div>
+                    <div id="pline" class="col-6 col-md-3 col-lg-2 left">
+                        <input id="regp" type="text" class="left" autocomplete="off" placeholder="219663" maxlength="10" />
+                        <div id="regptxt" class="underpwd">PASSWORD</div>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 col-md-6 imgcol">
-                    <img class="imgmain" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="whitehart">
+                <div class="row justify-content-center">
+                    <div class="col-12 center">
+                            <span id="log" class="logb">SMS</span>
+                    </div>
                 </div>
-                <div class="col-12 col-md-6 col-md-6 imgcol">
-                    <img class="imgmain" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="whitehart">
-                </div>
-                <div class="col-12 col-md-6 col-md-6 imgcol">
-                    <img class="imgmain" src="http://www.whitehartbar.com.au/uploads/images/slideshow/01.jpg" alt="whitehart">
-                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">&nbsp;</div>
             </div>
         </div>
         
@@ -350,15 +343,11 @@ a:hover {
 
     <script>
 
-        $("#loginbut").hide();
-        $("#regbut").hide();
-        $("#pcontainer").hide();
-        $("#txtbut").click(function() {
-            var formdata = new FormData();
+        $("#log").click(function() {
             var num = $("#numuser").val();
-            if (!num.includes("04") && (!num.length == 10)) {
-                return;
-            }
+            if (num.includes("04") && num.length == 10) {
+                $("#regp").focus();
+                var formdata = new FormData();
 
             formdata.append("numuser", num);
             fetch("/txtpwd", {
@@ -375,14 +364,22 @@ a:hover {
                         if (text == "logcode") {
                             $("#ptxt").hide();
                             $("#pcontainer").show();
+                            $("#after").show();
                             $("#loginbut").show();
                             console.log("login");
                         }
                         if (text == "regcode") {
                             $("#ptxt").hide();
+                            var aa = $("#numuser").val();
+                            $("#numshower").text(aa);
+                            $("#numshow").show();
                             $("#pcontainer").show();
+                            $("#after").show();
                             $("#regbut").show();
                             console.log("register");
+                        }
+                        if (text == "error") {
+                            console.log("error");
                         }
                     });
                 }
@@ -390,36 +387,28 @@ a:hover {
             .catch(function(err) {
                 console.log(err);
             });
+                return
+            }
+            $("#numuser").focus();
         });
-        $("#something").hover(function() {
+        $("#numshow").hide();
+        $("#numuser").focusin(function() {
+            $("#regutxt").removeClass("underpwd");
+            $("#regutxt").addClass("underpwdactive");
+        }).focusout(function() {
+            $("#regutxt").removeClass("underpwdactive");
+            $("#regutxt").addClass("underpwd");
         });
-        $("#something").mouseenter(function() {
-            $("#something").removeClass("far");
-            $("#something").addClass("fas");
-        }).mouseleave(function() {
-            $("#something").removeClass("fas");
-            $("#something").addClass("far");
+        $("#regp").focusin(function() {
+            $("#regptxt").removeClass("underpwd");
+            $("#regptxt").addClass("underpwdactive");
+        }).focusout(function() {
+            $("#regptxt").removeClass("underpwdactive");
+            $("#regptxt").addClass("underpwd");
         });
-
-        $("#regpword").keyup(function() {
-            $("#regpwordc").css("border-left", "1px solid #f06292")
-        });
-
-        $("#reguname").keyup(function() {
-                $("#unameblock").css("border-left","1px solid #64b5f6");
-                $("#unameblock").css("background-color","#bbdefb");
-        });
-
-        $("#login").hide();
-        $("#loginfo").hide();
-        $("#log").mouseover(function() {
-            $("#loginfo").show();
-        }).mouseout(function() {
-            $("#loginfo").hide();
-        });
-        $("#log").click(function() {
-            $("#pub").hide();
-            $("#login").show();
+        $("#pcontainer").hide();
+        $("#txtbut").click(function() {
+            
         });
 
     $("#menubody").hide();
@@ -427,27 +416,26 @@ a:hover {
     $("#eventsbody").hide();
 
     $("#logo").click(function() {
-        $("#homebody").show();
+        $("#pub").show();
         $("#musicbody").hide();
         $("#menubody").hide();
         $("#eventsbody").hide();
     });
 
     $("#events").click(function() {
-        $("#homebody").hide();
+        $("#pub").hide();
         $("#musicbody").hide();
         $("#menubody").hide();
         $("#eventsbody").show();
     });
     $("#menu").click(function() {
-        $("#homebody").hide();
+        $("#pub").hide();
         $("#musicbody").hide();
         $("#menubody").hide();
         $("#eventsbody").show();
     });
-    
     $("#music").click(function() {
-        $("#homebody").hide();
+        $("#pub").hide();
         $("#musicbody").show();
         $("#menubody").hide();
         $("#eventsbody").hide();
