@@ -65,17 +65,14 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := "+61"+r.FormValue("numuser")[1:]
 	code := sendSms(num)
-	p, err := fs.Collection("people").Doc(num).Get(context.Background())
-	if err != nil {
-		w.Write([]byte(`reg`))
-		_, e := fs.Collection("people").Doc(num).Set(context.Background(), map[string]interface{}{
-			"codevalidity": int(time.Now().Unix()),
-			"code": code,
-		})
-		if e != nil {
-			w.Write([]byte(`err`))
-			return
-		}
+	_, e := fs.Collection("people").Doc(num).Set(context.Background(), map[string]interface{}{
+		"codevalidity": int(time.Now().Unix()),
+		"code": code,
+	})
+	if e != nil {
+		w.Write([]byte(`err`))
+		return
+	}
 	}
 	w.Write([]byte(`log`))
 }
