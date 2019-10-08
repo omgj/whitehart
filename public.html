@@ -367,8 +367,11 @@ a:hover {
                         return
                     }
                     console.log("error");
-                })
+                });
             })
+            .catch(function(err) {
+                console.log(err);
+            });
         });
         $("#codeconfirm").hide();
         $("#log").click(function() {
@@ -410,6 +413,7 @@ a:hover {
             });
                 return
             }
+            
             $("#numuser").focus();
         });
         $("#numshow").hide();
