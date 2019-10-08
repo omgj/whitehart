@@ -38,6 +38,7 @@ func init() {
 func main() {
 	http.HandleFunc("/", public)
 	http.HandleFunc("/txtpwd", txtpwd)
+	http.HandleFunc("/codeconf", codeconf)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
@@ -46,19 +47,37 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
-func txtpwd(w http.ResponseWriter, r *http.Request) {
-	num := "+61"+r.FormValue("numuser")[1:]
-	// code := sendSms(num)
-	// fs.Collection("monkeys/logins").Where("created",">",strconv.Itoa())
-	_, err := fs.Collection("monkeys").Doc(num).Collection("logins").Doc(strconv.Itoa(int(time.Now().Unix()))).Set(context.Background(), map[string]interface{}{
-		"code": "asdasdsd",
-	})
+func codeconf(w http.ResponseWriter, r *http.Request) {
+	code := r.FormValue("code")
+	number := r.FormValue("number")
+	p, err := fs.Collection("people").Doc("61+"+number[1:]).Get(context.Background())
 	if err != nil {
-		w.Write([]byte(`error`))
-		log.Println(err)
+		w.Write([]byte(`wrong`))
 		return
 	}
-	w.Write([]byte(`regcode`))
+	person := p.Data()
+	if code == person["code"].(string) && person["codevalidity"].(int)-int(time.Now().Unix()) < 60 {
+		w.Write([]byte(`ok`))
+		return
+	}
+}
+
+func txtpwd(w http.ResponseWriter, r *http.Request) {
+	num := "+61"+r.FormValue("numuser")[1:]
+	code := sendSms(num)
+	p, err := fs.Collection("people").Doc(num).Get(context.Background())
+	if err != nil {
+		w.Write([]byte(`reg`))
+		_, e := fs.Collection("people").Doc(num).Set(context.Background(), map[string]interface{}{
+			"codevalidity": int(time.Now().Unix()),
+			"code": code,
+		})
+		if e != nil {
+			w.Write([]byte(`err`))
+			return
+		}
+	}
+	w.Write([]byte(`log`))
 }
 
 func sendSms(to string) string {

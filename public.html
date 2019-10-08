@@ -329,8 +329,11 @@ a:hover {
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-12 center">
+                    <div id="sms" class="col-12 center">
                             <span id="log" class="logb">SMS</span>
+                    </div>
+                    <div id="codeconfirm" class="col-12 center">
+                            <span id="codeconf" class="logb">CONFIRM</span>
                     </div>
                 </div>
             </div>
@@ -343,6 +346,31 @@ a:hover {
 
     <script>
 
+        $("#codeconf").click(function() {
+            var a = $("#regp").val();
+            var num = $("#numuser").val();
+            var aa = new FormData();
+            aa.append("number", num);
+            aa.append("code", a);
+            fetch("/codeconf", {
+                method: "post",
+                body: aa,
+            }).then(function(response) {
+                if (response.status !== 200) {
+                    console.log("error");
+                    return;
+                }
+
+                reponse.text().then(function(text) {
+                    if (text == "ok") {
+                        window.location.reload();
+                        return
+                    }
+                    console.log("error");
+                })
+            })
+        });
+        $("#codeconfirm").hide();
         $("#log").click(function() {
             var num = $("#numuser").val();
             if (num.includes("04") && num.length == 10) {
@@ -361,24 +389,17 @@ a:hover {
                     }
 
                     response.text().then(function(text) {
-                        if (text == "logcode") {
-                            $("#ptxt").hide();
-                            $("#pcontainer").show();
-                            $("#after").show();
-                            $("#loginbut").show();
+                        if (text == "log") {
+                            $("#codeconfirm").show();
+                            $("#sms").hide();
                             console.log("login");
                         }
-                        if (text == "regcode") {
-                            $("#ptxt").hide();
-                            var aa = $("#numuser").val();
-                            $("#numshower").text(aa);
-                            $("#numshow").show();
-                            $("#pcontainer").show();
-                            $("#after").show();
-                            $("#regbut").show();
+                        if (text == "reg") {
+                            $("#sms").hide();
+                            $("#codeconfirm").show();
                             console.log("register");
                         }
-                        if (text == "error") {
+                        if (text == "err") {
                             console.log("error");
                         }
                     });
@@ -408,7 +429,6 @@ a:hover {
         });
         $("#pcontainer").hide();
         $("#txtbut").click(function() {
-            
         });
 
     $("#menubody").hide();
