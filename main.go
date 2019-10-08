@@ -50,7 +50,7 @@ func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := "+61"+r.FormValue("numuser")[1:]
 	// code := sendSms(num)
 	// fs.Collection("monkeys/logins").Where("created",">",strconv.Itoa())
-	_, err := fs.Collection("monkeys").Doc(num).Collection("logins").Doc(strconv.Itoa(time.Now().Unix())).Set(context.Background(), map[string]interface{}{
+	_, err := fs.Collection("monkeys").Doc(num).Collection("logins").Doc(strconv.Itoa(int(time.Now().Unix()))).Set(context.Background(), map[string]interface{}{
 		"code": "asdasdsd",
 	})
 	if err != nil {
