@@ -355,7 +355,8 @@ a:hover {
             fetch("/codeconf", {
                 method: "post",
                 body: aa,
-            }).then(function(response) {
+            }).then(
+                function(response) {
                 if (response.status !== 200) {
                     console.log("error");
                     return;
@@ -363,8 +364,8 @@ a:hover {
 
                 response.text().then(function(text) {
                     if (text == "ok") {
-                        window.location.reload();
-                        return
+                        console.log("correct");
+                        return;
                     }
                     console.log("error");
                 });
@@ -395,12 +396,10 @@ a:hover {
                         if (text == "log") {
                             $("#codeconfirm").show();
                             $("#sms").hide();
-                            console.log("login");
                         }
                         if (text == "reg") {
                             $("#sms").hide();
                             $("#codeconfirm").show();
-                            console.log("register");
                         }
                         if (text == "err") {
                             console.log("error");
@@ -413,7 +412,7 @@ a:hover {
             });
                 return
             }
-            
+
             $("#numuser").focus();
         });
         $("#numshow").hide();

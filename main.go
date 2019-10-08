@@ -56,9 +56,14 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	person := p.Data()
-	if code == person["code"].(string) && person["codevalidity"].(int)-int(time.Now().Unix()) < 60 {
-		w.Write([]byte(`ok`))
-		return
+	realcode := person["code"].(string)
+	realvalid := person["validity"].(int)
+	now := int(time.Now().Unix())
+	if code == realcode {
+		if (now - realvalid)<int(1000) {
+			w.Write([]byte(`ok`))
+			return
+		}
 	}
 }
 
