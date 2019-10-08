@@ -73,7 +73,6 @@ func txtpwd(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`err`))
 		return
 	}
-	}
 	w.Write([]byte(`log`))
 }
 
