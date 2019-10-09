@@ -22,7 +22,7 @@ var fs *firestore.Client
 const (
 	twilioNumber = "+61480019099"
 	twilioSid   = "AC836708d5d4b4c2ba9a14aaa0c0f692c2"
-	twilioAuth  = "f0f64339eea0feb0aa54a15f70acc66b"
+	// twilioAuth  = "f0f64339eea0feb0aa54a15f70acc66b"
 	twilioUrl = "https://api.twilio.com/2010-04-01/Accounts/"+twilioSid+"/Messages.json"
 )
 
@@ -64,6 +64,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	log.Print(dm)
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
+			// fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: ""}}
 			w.Write([]byte(`ok`))
 			return
 		}
@@ -96,6 +97,7 @@ func sendSms(to string) string {
 	msgDataReader := *strings.NewReader(msgData.Encode())
 	client := &http.Client{}
 	req, _ := http.NewRequest("POST", twilioUrl, &msgDataReader)
+	twilioAuth := os.Getenv("TWILAUTH")
 	req.SetBasicAuth(twilioSid, twilioAuth)
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
