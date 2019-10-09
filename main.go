@@ -21,8 +21,6 @@ var fs *firestore.Client
 
 const (
 	twilioNumber = "+61480019099"
-	twilioSid   = "AC836708d5d4b4c2ba9a14aaa0c0f692c2"
-	// twilioAuth  = "f0f64339eea0feb0aa54a15f70acc66b"
 	twilioUrl = "https://api.twilio.com/2010-04-01/Accounts/"+twilioSid+"/Messages.json"
 )
 
@@ -98,6 +96,7 @@ func sendSms(to string) string {
 	client := &http.Client{}
 	req, _ := http.NewRequest("POST", twilioUrl, &msgDataReader)
 	twilioAuth := os.Getenv("TWILAUTH")
+	twilioSid = os.Getenv("TWILSID")
 	req.SetBasicAuth(twilioSid, twilioAuth)
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
