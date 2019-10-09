@@ -83,7 +83,7 @@ func txtpwd(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendSms(to string) string {
-	r := rand.New(time.Now.UnixNano())
+	r := rand.New(time.Now().UnixNano())
 	randomnumber := strconv.Itoa(r.Intn(1000000))
 	msgData := url.Values{}
 	msgData.Set("To", to)
