@@ -50,7 +50,7 @@ func main() {
 func codeconf(w http.ResponseWriter, r *http.Request) {
 	code := r.FormValue("code")
 	number := r.FormValue("number")
-	num := "61+"+number[1:]
+	num := "+61"+number[1:]
 	ctx := context.Background()
 	people := fs.Collection("people")
 	who := people.Doc(num)
