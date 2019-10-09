@@ -83,7 +83,8 @@ func txtpwd(w http.ResponseWriter, r *http.Request) {
 }
 
 func sendSms(to string) string {
-	randomnumber := strconv.Itoa(rand.Intn(10000))
+	r := rand.New(time.Now.UnixNano())
+	randomnumber := strconv.Itoa(r.Intn(1000000))
 	msgData := url.Values{}
 	msgData.Set("To", to)
 	msgData.Set("From",twilioNumber)
