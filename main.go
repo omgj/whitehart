@@ -52,10 +52,11 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	number := r.FormValue("number")
 	p, err := fs.Collection("people").Doc("61+"+number[1:]).Get(context.Background())
 	if err != nil {
-		w.Write([]byte(`wrong`))
+		w.Write([]byte(`err`))
 		return
 	}
 	person := p.Data()
+	log.Print(person)
 	realcode := person["code"].(string)
 	realvalid := person["validity"].(int)
 	now := int(time.Now().Unix())
