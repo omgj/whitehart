@@ -63,10 +63,12 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	dm := ds.Data()
 	log.Print(dm)
 	if code == dm["code"].(string) {
-		w.Write([]byte(`ok`))
-		return
+		if (int(time.Now().Unix())-dm["codevalidity"].(int))<30 {
+			w.Write("ok")
+			return
+		}
 	}
-	w.Write([]byte(`ok`))
+	w.Write([]byte(`err`))
 }
 
 func txtpwd(w http.ResponseWriter, r *http.Request) {
