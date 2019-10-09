@@ -63,7 +63,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	dm := ds.Data()
 	log.Print(dm)
 	if code == dm["code"].(string) {
-		if (int(time.Now().Unix())-dm["codevalidity"].(int))<30 {
+		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
 			w.Write([]byte(`ok`))
 			return
 		}
