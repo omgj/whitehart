@@ -51,23 +51,22 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	code := r.FormValue("code")
 	number := r.FormValue("number")
 	num := "61+"+number[1:]
-	p, err := fs.Collection("people").Doc(num).Get(context.Background())
+	ctx := context.Background()
+	people := fs.Collection("people")
+	who := people.Doc(num)
+	ds, err := who.Get(ctx)
 	if err != nil {
-		log.Println("error getting code")
+		log.Println("couldn't find person")
 		w.Write([]byte(`err`))
 		return
 	}
-	person := p.Data()
-	log.Print(person)
-	realcode := person["code"].(string)
-	realvalid := person["validity"].(int)
-	now := int(time.Now().Unix())
-	if code == realcode {
-		if (now - realvalid)<int(1000) {
-			w.Write([]byte(`ok`))
-			return
-		}
+	dm := ds.Data()
+	log.Print(dm)
+	if code == dm["code"].(string) {
+		w.Write([]byte(`ok`))
+		return
 	}
+	w.Write([]byte(`ok`))
 }
 
 func txtpwd(w http.ResponseWriter, r *http.Request) {
