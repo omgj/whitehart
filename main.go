@@ -93,7 +93,7 @@ func sendSms(to string) string {
 	msgData.Set("Body", randomnumber)
 	msgDataReader := *strings.NewReader(msgData.Encode())
 	client := &http.Client{}
-	twilioSid = os.Getenv("TWILSID")
+	twilioSid := os.Getenv("TWILSID")
 	twilioUrl := "https://api.twilio.com/2010-04-01/Accounts/"+twilioSid+"/Messages.json"
 	req, _ := http.NewRequest("POST", twilioUrl, &msgDataReader)
 	twilioAuth := os.Getenv("TWILAUTH")
