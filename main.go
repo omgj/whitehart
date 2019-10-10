@@ -12,7 +12,8 @@ import (
 	"net/url"
 	"strings"
 	"os"
-	"crypto/rand"
+	"math/rand"
+	"crypto/rand" rander
 	"encoding/json"
 	"strconv"
 	"time"
@@ -63,7 +64,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
 			b := make([]byte, 32)
-			_, er := io.ReadFull(rand.Reader, b) 
+			_, er := io.ReadFull(rander.Reader, b) 
 			if er != nil {
 				w.Write([]byte(`err`))
 				return
