@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"encoding/base64"
 	"context"
 	"cloud.google.com/go/firestore"
 	"net/http"
