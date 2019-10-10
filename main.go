@@ -12,7 +12,7 @@ import (
 	"net/url"
 	"strings"
 	"os"
-	"math/rand"
+	"crypto/rand"
 	"encoding/json"
 	"strconv"
 	"time"
