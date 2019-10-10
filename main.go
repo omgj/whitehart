@@ -13,7 +13,6 @@ import (
 	"strings"
 	"os"
 	"math/rand"
-	"crypto/rand" rander
 	"encoding/json"
 	"strconv"
 	"time"
@@ -63,13 +62,8 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	log.Print(dm)
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
-			b := make([]byte, 32)
-			_, er := io.ReadFull(rander.Reader, b) 
-			if er != nil {
-				w.Write([]byte(`err`))
-				return
-			}
-			uuid := base64.URLEncoding.EncodeToString(b)
+			r := rand.New(rand.NewSource(time.Now().UnixNano()))
+			uuid := strconv.Itoa(r.Intn(1000000000))
 			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: uuid}})
 			if errr != nil {
 				w.Write([]byte(`err`))
