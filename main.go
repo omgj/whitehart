@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"encoding/base64"
 	"context"
 	"cloud.google.com/go/firestore"
 	"net/http"
@@ -61,7 +62,23 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	log.Print(dm)
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
-			// fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: ""}}
+			b := make([]byte, 32)
+			_, er := io.ReadFull(rand.Reader, b) 
+			if er != nil {
+				w.Write([]byte(`err`))
+				return
+			}
+			uuid := base64.URLEncoding.EncodeToString(b)
+			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: uuid}}
+			if errr != nil {
+				w.Write([]byte(`err`))
+				return
+			}
+			_, errrr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionvalue", Value: int(time.Now().Unix())+10000}}
+			if errrr != nil {
+				w.Write([]byte(`err`))
+				return
+			}
 			w.Write([]byte(`ok`))
 			return
 		}
