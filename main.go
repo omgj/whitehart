@@ -69,12 +69,12 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			uuid := base64.URLEncoding.EncodeToString(b)
-			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: uuid}}
+			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: uuid}})
 			if errr != nil {
 				w.Write([]byte(`err`))
 				return
 			}
-			_, errrr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionvalue", Value: int(time.Now().Unix())+10000}}
+			_, errrr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionvalue", Value: int(time.Now().Unix())+10000}})
 			if errrr != nil {
 				w.Write([]byte(`err`))
 				return
