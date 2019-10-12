@@ -73,7 +73,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 				w.Write([]byte(`err`))
 				return
 			}
-			coo := http.Cookie{Name: "whart", Value: uuid, Expires: time.Now().Add(1000000)}
+			coo := http.Cookie{Name: "whart", Value: uuid}
 			http.SetCookie(w, &coo)
 			w.Write([]byte(`ok`))
 			return
