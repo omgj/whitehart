@@ -67,7 +67,6 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	log.Print(dm)
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
-			r := rand.New(rand.NewSource(time.Now().UnixNano()))
 			uuids := uuid.New()
 			uui := uuids.String()+sessionsecret
 			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionid", Value: uui}})
