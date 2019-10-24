@@ -162,5 +162,5 @@ func public(w http.ResponseWriter, r *http.Request) {
 		log.Print(doc.Data())
 	}
 	aaa, _ := ioutil.ReadFile("public.html")
-	io.WriteString(w, string(aaaa))
+	io.WriteString(w, string(aaa))
 }
