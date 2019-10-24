@@ -7,6 +7,7 @@ import (
 	"log"
 	"context"
 	"cloud.google.com/go/firestore"
+	"github.com/google/uuid"
 	"net/http"
 	"net/url"
 	"strings"
@@ -23,6 +24,10 @@ const (
 	twilioNumber = "+61480019099"
 )
 
+var (
+	sessionsecret = ""
+)
+
 func init() {
 	var err error
 	ctx := context.Background()
@@ -33,6 +38,7 @@ func init() {
 }
 
 func main() {
+	sessionsecret = os.Getenv("SESHSECRET")
 	http.HandleFunc("/", public)
 	http.HandleFunc("/txtpwd", txtpwd)
 	http.HandleFunc("/codeconf", codeconf)
@@ -62,18 +68,19 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
 			r := rand.New(rand.NewSource(time.Now().UnixNano()))
-			uuid := strconv.Itoa(r.Intn(1000000000))
-			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "session", Value: uuid}})
+			uuids := uuid.New()
+			uui := uuids.String()+sessionsecret
+			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionid", Value: uui}})
 			if errr != nil {
 				w.Write([]byte(`err`))
 				return
 			}
-			_, errrr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionvalue", Value: int(time.Now().Unix())+10000}})
+			_, errrr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessioncreated", Value: int(time.Now().Unix())}})
 			if errrr != nil {
 				w.Write([]byte(`err`))
 				return
 			}
-			coo := http.Cookie{Name: "whart", Value: uuid}
+			coo := http.Cookie{Name: "whart", Value: uuids.String(), Path: "/"}
 			http.SetCookie(w, &coo)
 			w.Write([]byte(`ok`))
 			return
@@ -130,6 +137,30 @@ func sendSms(to string) string {
 }
 
 func public(w http.ResponseWriter, r *http.Request) {
-	a, _ := ioutil.ReadFile("public.html")
-	io.WriteString(w, string(a))
+	c, e := r.Cookie("whart")
+	if e != nil {
+		a, _ := ioutil.ReadFile("public.html")
+		io.WriteString(w, string(a))
+		return
+	}
+	q := fs.Collection("people").Where("sessionid", "==", c.Value+sessionsecret)
+	ctx := context.Background()
+	iter := q.Documents(ctx)
+	defer iter.Stop()
+	for {
+		doc, err := iter.Next()
+		if err != nil {
+			a, _ := ioutil.ReadFile("public.html")
+			log.Println("iterator error.")
+			io.WriteString(w, string(a))
+			return
+		}
+		aa := doc.Data()
+		if aa["sessioncreated"].(int) < int(time.Now().Unix()-1000) {
+			log.Println("too old")
+		}
+		log.Print(doc.Data())
+	}
+	aaa, _ := ioutil.ReadFile("public.html")
+	io.WriteString(w, string(aaaa))
 }
