@@ -155,7 +155,7 @@ func public(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		aa := doc.Data()
-		if aa["sessioncreated"].(int) < int(time.Now().Unix()-1000) {
+		if int(aa["sessioncreated"].(int64)) < int(time.Now().Unix()-1000) {
 			log.Println("too old")
 		}
 		log.Print(doc.Data())
