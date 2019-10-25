@@ -24,10 +24,6 @@ const (
 	twilioNumber = "+61480019099"
 )
 
-var (
-	sessionsecret = ""
-)
-
 func init() {
 	var err error
 	ctx := context.Background()
@@ -38,7 +34,6 @@ func init() {
 }
 
 func main() {
-	sessionsecret = os.Getenv("SESHSECRET")
 	http.HandleFunc("/", public)
 	http.HandleFunc("/txtpwd", txtpwd)
 	http.HandleFunc("/codeconf", codeconf)
@@ -68,6 +63,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 	if code == dm["code"].(string) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
 			uuids := uuid.New()
+			sessionsecret := os.Getenv("SESHSECRET")
 			uui := uuids.String()+sessionsecret
 			_, errr := fs.Collection("sessions").Doc(uui).Set(context.Background(), map[string]interface{}{
 				"sessioncreated": int(time.Now().Unix()),
