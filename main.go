@@ -69,13 +69,11 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 		if (int(time.Now().Unix())-int(dm["codevalidity"].(int64)))<30 {
 			uuids := uuid.New()
 			uui := uuids.String()+sessionsecret
-			_, errr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessionid", Value: uui}})
+			_, errr := fs.Collection("sessions").Doc(uui).Set(context.Background(), map[string]interface{}{
+				"sessioncreated": int(time.Now().Unix()),
+				"user": num,
+			})
 			if errr != nil {
-				w.Write([]byte(`err`))
-				return
-			}
-			_, errrr := fs.Collection("people").Doc(num).Update(ctx, []firestore.Update{{Path: "sessioncreated", Value: int(time.Now().Unix())}})
-			if errrr != nil {
 				w.Write([]byte(`err`))
 				return
 			}
@@ -142,24 +140,13 @@ func public(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, string(a))
 		return
 	}
-	q := fs.Collection("people").Where("sessionid", "==", c.Value+sessionsecret)
-	ctx := context.Background()
-	iter := q.Documents(ctx)
-	defer iter.Stop()
-	for {
-		doc, err := iter.Next()
-		if err != nil {
-			a, _ := ioutil.ReadFile("public.html")
-			log.Println("iterator error.")
-			io.WriteString(w, string(a))
-			return
-		}
-		aa := doc.Data()
-		if int(aa["sessioncreated"].(int64)) < int(time.Now().Unix()-1000) {
-			log.Println("too old")
-		}
-		log.Print(doc.Data())
+	q, er := fs.Collection("sessions").Doc(c.Value+sessionsecret).Get(context.Background())
+	if er != nil {
+		aaaa, _ := ioutil.ReadFile("public.html")
+		io.WriteString(w, string(aaaa))
+		log.Println("session not created")
 	}
-	aaa, _ := ioutil.ReadFile("public.html")
-	io.WriteString(w, string(aaa))
+	mm := q.Data()
+	log.Println(mm["user"].(string))
+	io.WriteString(w, mm["user"].(string))
 }
