@@ -136,6 +136,7 @@ func public(w http.ResponseWriter, r *http.Request) {
 		io.WriteString(w, string(a))
 		return
 	}
+	sessionsecret := os.Getenv("SESHSECRET")
 	q, er := fs.Collection("sessions").Doc(c.Value+sessionsecret).Get(context.Background())
 	if er != nil {
 		aaaa, _ := ioutil.ReadFile("public.html")
