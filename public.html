@@ -342,7 +342,12 @@ a:hover {
                 <img id="logo" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
             </div>
             <div id="somewhere" class="col-12 center">
-                <a id="addre" class="log" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">22 Whitehart Lane, Melbourne CBD 3000</a>
+                <a id="addre" class="log" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">Whitehart Lane, Melbourne</a>
+            </div>
+        </div>
+        <div id="userr">
+            <div class="row">
+                <div id="userrs" class="txt center col-12"></div>
             </div>
         </div>
             <div id="somewhere" class="row justify-content-center">
@@ -358,7 +363,7 @@ a:hover {
                 <div id="codeconfirm" class="col-6 col-md-3 col-lg-2 right">
                     <div id="codeconf" class="logb">CONFIRM</div>
                     <div id="numfin" class="logba"></div>
-            </div>
+                </div>
             </div>
         <div class="row">
             <div class="col-12 center">
@@ -415,7 +420,7 @@ a:hover {
     </div>
 
     <script>
-
+        $("#userr").hide();
         $("#pwdr").hide();
         $("#codeconf").click(function() {
             var a = $("#regp").val();
@@ -434,15 +439,12 @@ a:hover {
                 }
 
                 response.text().then(function(text) {
-                    if (text == "ok") {
-                        console.log("correct");
-                        return;
-                    }
                     if (text == "err") {
                         console.log("err");
                         return;
                     }
-                    console.log("error");
+                    $("#userr").show();
+                    $("#userrs").text(text);
                 });
             })
             .catch(function(err) {

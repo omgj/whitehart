@@ -75,7 +75,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 			}
 			coo := http.Cookie{Name: "whart", Value: uuids.String(), Path: "/"}
 			http.SetCookie(w, &coo)
-			w.Write([]byte(`ok`))
+			w.Write([]byte(num))
 			return
 		}
 	}
