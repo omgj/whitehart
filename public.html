@@ -3,14 +3,12 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Whitehart</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f34ab3dac3.js"></script>
-
     <style>
 body {
     background-color: #222;
@@ -43,16 +41,18 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
-
- @media (max-width: 500px) {
-#logo {
-    height: 30px;
-    text-align: center;
-    margin-top: 19px;
-    margin-bottom: 8px;
-    cursor: pointer;
+a {
+    text-decoration: none !important;
 }
-#menu {
+ @media (max-width: 500px) {
+    #logo {
+        height: 30px;
+        text-align: center;
+        margin-top: 19px;
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+    #menu {
         font-size: 18px;
         font-weight: 300;
     }
@@ -75,13 +75,13 @@ input[type=number]::-webkit-outer-spin-button {
 }
   @media (min-width: 501px) {
     #logo {
-    height: 22px;
-    text-align: center;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-#menu {
+        height: 22px;
+        text-align: center;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+    #menu {
         font-size: 15px;
         font-weight: 300;
     }
@@ -100,7 +100,7 @@ input[type=number]::-webkit-outer-spin-button {
             color: ghostwhite;
             font-weight: 100;
             letter-spacing: 1.5px;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-family: 'Roboto', sans-serif;
 }
 }
@@ -135,14 +135,6 @@ input[type=number]::-webkit-outer-spin-button {
     color: #818181;
     font-weight: 100;
 }
-#numuser::placeholder {
-    color: #414141;
-    font-size: 18px;
-}
-#numuser {
-    font-size: 18px;
-    width: 150px;
-}
 #regp, #regp::placeholder {
     font-size: 18px;
     color: #414141;
@@ -171,9 +163,36 @@ input[type=number]::-webkit-outer-spin-button {
 }
   #instagram {
     font-size: 20px;
+    color: ghostwhite;
 }
 #facebook {
     font-size: 20px;
+    color: ghostwhite;
+}
+.abcdef {
+    color: ghostwhite;
+    font-weight: 100;
+    font-size: 9px;
+}
+.fas {
+    font-size: 20px;
+    color: #f2f2f2;
+}
+#unum {
+    width: 110px;
+    cursor: text;
+}
+#upwd {
+    width: 90px;
+    cursor: text;
+}
+#usms {
+    color: #66BB6A;
+    font-weight: 300;
+    font-size: 15px;
+}
+#sms:hover {
+    font-weight: 400;
 }
     </style>
 </head>
@@ -193,19 +212,36 @@ input[type=number]::-webkit-outer-spin-button {
                 <span id="menu" class="log com">MENU</span>&nbsp;&nbsp;
                 <span id="music" class="log com">MUSIC</span>&nbsp;&nbsp;
                 <span id="events" class="log com">EVENTS</span>&nbsp;&nbsp;
-                <span id="uid" class="com ider"></span>&nbsp;&nbsp;
-                <input id="unum" class="com" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />&nbsp;&nbsp;
-                <input id="upwd" type="text" class="com" autocomplete="off" placeholder="219663" maxlength="6" />&nbsp;&nbsp;
-                <span id="usms" class="logb">SMS</span>&nbsp;&nbsp;
-                <div id="ucon" class="logb">CONFIRM</div>&nbsp;&nbsp;
-                <span id="ulo" class="hlog com">LOGOUT</span>&nbsp;&nbsp;
+                <input id="unum" class="com" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />
+                <span id="uid" class="com ider"></span>
+                <input id="upwd" type="text" class="com" autocomplete="off" placeholder="219663" maxlength="6" />
+                <span id="usms" class="com">&nbsp;&nbsp;SMS</span>
+                <div id="ucon" class="logb">&nbsp;&nbsp;CONFIRM</div>
+                <span id="ulo" class="hlog com">&nbsp;&nbsp;LOGOUT</span>
                 <span id="ucart" class="com">$0.00</span>
             </div>
         </div>
         <div id="menub">
-            <div class="row">
-                <div class="col-12">
-                    <span class="log">Menu</span>
+            <div class="row justify-content-center">
+                <div class="col-2 col-lg-1 col-md-1 center">
+                    <div><i class="fas fa-beer"></i></div> 
+                    <div class="abcdef com">Beer</div> 
+                </div>
+                <div class="col-2 col-lg-1 col-md-1 center">
+                    <div><i class="fas fa-wine-glass-alt"></i></div> 
+                    <div class="abcdef com">Wine</div> 
+                </div>
+                <div class="col-3 col-lg-1 col-md-1 center">
+                    <div><i class="fas fa-cocktail"></i></div> 
+                    <div class="abcdef com">Cocktails</div> 
+                </div>
+                <div class="col-2 col-lg-1 col-md-1 center">
+                    <div><i class="fas fa-ghost"></i></div> 
+                    <div class="abcdef com">Spirits</div> 
+                </div>
+                <div class="col-2 col-lg-1 col-md-1 center">
+                    <div><i class="fas fa-utensils"></i></div> 
+                    <div class="abcdef com">Eat</div> 
                 </div>
             </div>
         </div>
@@ -295,6 +331,11 @@ input[type=number]::-webkit-outer-spin-button {
         $("#ucon").hide();
         $("#ulo").hide();
         $("#ucart").hide();
+
+        $("#musicb").hide();
+        $("#menub").hide();
+        $("#userb").hide();
+        $("#eventsb").hide();
 
         window.onload = function() {
             fetch("/whoami", {
@@ -391,6 +432,7 @@ input[type=number]::-webkit-outer-spin-button {
                             return;
                         }
                         $("#unum").hide();
+                        $("#usms").hide();
                         $("#upwd").show();
                     });
                 }).catch(function(err) {
