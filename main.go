@@ -74,7 +74,8 @@ func whoami(w http.ResponseWriter, r *http.Request) {
 	}
 	mm := q.Data()
 	user := mm["user"].(string)
-	w.Write([]byte(user))
+	muser := "0"+user[3:]
+	w.Write([]byte(muser))
 }
 
 func codeconf(w http.ResponseWriter, r *http.Request) {
@@ -107,7 +108,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 			}
 			coo := http.Cookie{Name: "whart", Value: uuids.String(), Path: "/"}
 			http.SetCookie(w, &coo)
-			w.Write([]byte(num))
+			w.Write([]byte("0"+num[3:]))
 			return
 		}
 	}

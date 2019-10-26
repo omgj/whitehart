@@ -83,6 +83,18 @@
             letter-spacing: 1px;
             font-size: .8em;
         }
+        .txti {
+            color: #717171;
+            font-weight: 100;
+            letter-spacing: 1px;
+            font-size: .8em;
+        }
+        .txty {
+            color: #FDD835;
+            font-weight: 100;
+            letter-spacing: 1px;
+            font-size: .8em;
+        }
 .bigger {
     width: 100%;
 }
@@ -241,7 +253,15 @@ a:hover {
         }
 #numuser::placeholder {
     color: #414141;
-    font-size: 25px;
+    font-size: 20px;
+}
+#numuser {
+    font-size: 21px;
+}
+#emin {
+    color: #414141;
+    font-size: 20px;
+    text-align: right;
 }
   @media (max-width: 500px) {
 
@@ -318,6 +338,12 @@ a:hover {
     font-family: 'Roboto', sans-serif;
     font-size: 1.2em;
 }
+.delcard {
+    color: #ef9a9a;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    cursor: pointer;
+}
   }
   #instagram {
     font-size: 20px;
@@ -359,11 +385,7 @@ a:hover {
         </div>
         <div id="userr">
             <div class="row">
-                <div class="txt center col-12">
-                    <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                    <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
-                    <span id="userrs" class="txt"></span>
-                </div>
+                <div id="userrs" class="center col-12 txt"></div>
             </div>
         </div>
         <div id="somewhere" class="row justify-content-center">
@@ -411,18 +433,37 @@ a:hover {
         </div>
         <div id="userbod">
             <div class="row">
-                <div id="settingsb" class="col-6 hset center">SETTINGS</div>
-                <div id="logoutb" class="col-6 hlog center">LOGOUT</div>
+                <div id="settingsb" class="col-6 col-md-3 col-lg-2 hset center">SETTINGS</div>
+                <div id="logoutb" class="col-6 col-md-3 col-lg-2 hlog center">LOGOUT</div>
             </div>
             <div id="settingslist">
                 <div class="row">
-                    <div class="col-6 left txt">NUMBER</div>
-                    <div class="col-6 right txt">0413123123</div>
+                    <div class="col-4 col-md-2 col-lg-1 left txti">NUMBER</div>
+                    <div class="col-8 col-md-3 col-lg-2 right txt">0413123123</div>
+                </div>
+                <div class="row">
+                    <div class="col-4 col-md-2 col-lg-1 left txti">CARD</div>
+                    <div class="col-8 col-md-3 col-lg-2 right txt"><i class="fab fa-cc-mastercard"></i> 7656 <span class="delcard">DELETE</span></div>
+                </div>
+                <div class="row">
+                    <div class="col-12 center txt">
+                        <input type="text" id="emin" placeholder="hi@whitehart.bar" />
+                        <div id="emailsend">
+                            <span id="emailsendb" class="logb">SEND</span>
+                        </div>
+                        <div id="emailconfirm">
+                            <div id="emailcofirmb" class="logb">CONFIRM</div>
+                            <div id="emailsent" class="logba"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="txhistory">
                 <div class="row">
-                    <div class="col-2 txt">20/8</div>
+                    <div class="col-2 txti">
+                        <div class="txty">Mon</div>
+                        <div id="txti">20.2</div>
+                    </div>
                     <div class="col-4 txt">$100.12</div>
                     <div class="col-2 txt">4</div>
                     <div class="col-4 txt"><i class="fab fa-cc-visa"></i> 3847</div>
@@ -446,6 +487,10 @@ a:hover {
                     <p class="abcde center">But you don't have to worry about any of that because in Melbourne, it means only one thing - an all encompassing gathering space with great music, the finest craft beers and cocktails, boutique wines, great food and a kaleidoscopic visual feast of projections and graffiti.</p>
                     <p class="abcde center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p> 
                     <p class="abcde center">Melbournes CBD now has a WHITE HART.</p>  
+                </div>
+                <div class="col-12 center">
+                        <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                        <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
                 </div>
             </div>
         </div>
@@ -477,6 +522,41 @@ a:hover {
                 console.log(err);
             });
         };
+        $("#emailconfirm").hide();
+        $("#emailsendb").click(function() {
+            var a = $("#emin").val();
+            var fd = new FormData();
+            fd.append("email", a);
+            fetch("/emailcode", {
+                method: "post",
+                body: fd,
+            }).then(function(response) {
+                if (response.status !== 200) {
+                    console.log("error");
+                    return;
+                }
+                response.text().then(function(text) {
+                    if (text == "err") {
+                        console.log("err");
+                        return;
+                    }
+                    $("#emailsend").hide();
+                    $("#emailconfirm").show();
+                    $("#emailsent").text(text);
+                });
+            }).catch(function(err) {
+                console.log(err);
+            });
+        });
+        $("#emailsend").hide();
+        $("#emin").keyup(function() {
+            var a = $("#emin").val();
+            if (a.includes("@")) {
+                $("#emailsend").show();
+                return;
+            }
+            $("#emailsend").hide();
+        });
         $("#logoutb").click(function() {
             fetch("/logout", {
                 method: "get",
