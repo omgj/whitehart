@@ -152,11 +152,10 @@ a {
     font-size: .9em;
     letter-spacing: 2px;
 }
-.delcard {
+.cancel {
     color: #ef9a9a;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 100;
     cursor: pointer;
+    font-size: 16px;
 }
 #userrs:hover {
     color: ghostwhite;
@@ -174,7 +173,7 @@ a {
     font-weight: 100;
     font-size: 9px;
 }
-.fas {
+.fas, .fab {
     font-size: 27px;
     color: #f2f2f2;
 }
@@ -199,6 +198,11 @@ a {
     font-weight: 300;
     font-size: 15px;
 }
+.txtl {
+    color: ghostwhite;
+    font-size: 16px;
+    font-weight: 100;
+}
     </style>
 </head>
 <body>
@@ -221,8 +225,8 @@ a {
                 <input id="upwd" type="text" class="com" autocomplete="off" placeholder="219663" maxlength="6" />
                 <span id="usms" class="com">&nbsp;&nbsp;SMS</span>
                 <span id="ucon" class="com">&nbsp;&nbsp;CONFIRM</span>
+                <span id="ucart" class="com">$0.00</span>&nbsp;
                 <span id="uid" class="com ider"></span>
-                <span id="ucart" class="com">$0.00</span>
             </div>
         </div>
         <div id="menub">
@@ -274,36 +278,27 @@ a {
                     <div id="userrs" class="txt"></div>
                     <div class="txti">NUMBER</div>
                 </div>
-                <div class="col-4 col-md-2 col-lg-1">
-                    <span class="delcard">DELETE</span>    
+                <div class="col-4 col-md-2 col-lg-1 right">
+                    <i class="fas fa-minus-circle cancel"></i>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">&nbsp;</div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-8 col-md-5 col-lg-3">
-                    <div class="txt"><i class="fab fa-cc-mastercard"></i> 7656 </div>
+                <div class="col-8 col-md-5 col-lg-3 left">
+                    <div class="txt"><i class="fab fa-cc-mastercard"></i> 7656</div>
                     <div class="txti">CARD</div>
                 </div>
-                <div class="col-4 col-md-2 col-lg-1">
-                    <span class="delcard">DELETE</span>    
+                <div class="col-4 col-md-2 col-lg-1 right">
+                    <i class="fas fa-minus-circle cancel"></i>
                 </div>
             </div>
             <div class="row">
-                <div class="col-2 txti">
-                    <div class="txty">Mon</div>
-                    <div id="txti">20.2</div>
-                </div>
-                <div class="col-4 txt">$100.12</div>
-                <div class="col-2 txt">4</div>
-                <div class="col-4 txt"><i class="fab fa-cc-visa"></i> 3847</div>
-            </div>
-            <div class="row">
-                <div class="col-2 txtl">24/8</div>
-                <div class="col-4 txtl">$13.12</div>
-                <div class="col-2 txtl">4</div>
-                <div class="col-4 txtl"><i class="fab fa-cc-mastercard"></i> 7656</div>
+                <div class="col-2 txtl com">24/8</div>
+                <div class="col-4 txtl com">$13.12</div>
+                <div class="col-2 txtl com">4</div>
+                <div class="col-4 txtl com"><i class="fab fa-cc-mastercard"></i> 7656</div>
             </div>
         </div>
         <div id="pub">
@@ -423,7 +418,6 @@ a {
         $("#usms").click(function() {
             var num = $("#unum").val();
             if (num.includes("04") && num.length == 10) {
-                $("#upwd").show();
                 var formdata = new FormData();
                 formdata.append("numuser", num);
                 fetch("/txtpwd", {
