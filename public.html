@@ -80,7 +80,7 @@
         .txt {
             color: ghostwhite;
             font-weight: 100;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-size: .8em;
         }
         .txti {
@@ -260,8 +260,11 @@ a:hover {
 }
 #emin {
     color: #414141;
+    font-size: 21px;
+}
+#emin::placeholder {
+    color: #414141;
     font-size: 20px;
-    text-align: right;
 }
   @media (max-width: 500px) {
 
@@ -344,7 +347,13 @@ a:hover {
     font-weight: 100;
     cursor: pointer;
 }
-  }
+#userrs {
+    color: #616161;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-size: 21px;
+    cursor: pointer;
+}
   #instagram {
     font-size: 20px;
 }
@@ -385,7 +394,7 @@ a:hover {
         </div>
         <div id="userr">
             <div class="row">
-                <div id="userrs" class="center col-12 txt"></div>
+                <div id="userrs" class="center col-12"></div>
             </div>
         </div>
         <div id="somewhere" class="row justify-content-center">
@@ -437,26 +446,15 @@ a:hover {
                 <div id="logoutb" class="col-6 col-md-3 col-lg-2 hlog center">LOGOUT</div>
             </div>
             <div id="settingslist">
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-4 col-md-2 col-lg-1 left txti">NUMBER</div>
                     <div class="col-8 col-md-3 col-lg-2 right txt">0413123123</div>
                 </div>
-                <div class="row">
+                <div class="row justify-content-center">
                     <div class="col-4 col-md-2 col-lg-1 left txti">CARD</div>
                     <div class="col-8 col-md-3 col-lg-2 right txt"><i class="fab fa-cc-mastercard"></i> 7656 <span class="delcard">DELETE</span></div>
                 </div>
-                <div class="row">
-                    <div class="col-12 center txt">
-                        <input type="text" id="emin" placeholder="hi@whitehart.bar" />
-                        <div id="emailsend">
-                            <span id="emailsendb" class="logb">SEND</span>
-                        </div>
-                        <div id="emailconfirm">
-                            <div id="emailcofirmb" class="logb">CONFIRM</div>
-                            <div id="emailsent" class="logba"></div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
             <div id="txhistory">
                 <div class="row">
@@ -498,6 +496,8 @@ a:hover {
     </div>
 
     <script>
+        var menufetched = false;
+        $("#somewhere").hide();
         window.onload = function() {
             fetch("/whoami", {
                 method: "get",
@@ -522,41 +522,6 @@ a:hover {
                 console.log(err);
             });
         };
-        $("#emailconfirm").hide();
-        $("#emailsendb").click(function() {
-            var a = $("#emin").val();
-            var fd = new FormData();
-            fd.append("email", a);
-            fetch("/emailcode", {
-                method: "post",
-                body: fd,
-            }).then(function(response) {
-                if (response.status !== 200) {
-                    console.log("error");
-                    return;
-                }
-                response.text().then(function(text) {
-                    if (text == "err") {
-                        console.log("err");
-                        return;
-                    }
-                    $("#emailsend").hide();
-                    $("#emailconfirm").show();
-                    $("#emailsent").text(text);
-                });
-            }).catch(function(err) {
-                console.log(err);
-            });
-        });
-        $("#emailsend").hide();
-        $("#emin").keyup(function() {
-            var a = $("#emin").val();
-            if (a.includes("@")) {
-                $("#emailsend").show();
-                return;
-            }
-            $("#emailsend").hide();
-        });
         $("#logoutb").click(function() {
             fetch("/logout", {
                 method: "get",
