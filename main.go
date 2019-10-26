@@ -36,6 +36,7 @@ func init() {
 func main() {
 	http.HandleFunc("/", public)
 	http.HandleFunc("/whoami", whoami)
+	http.HandleFunc("/logout", logout)
 	http.HandleFunc("/txtpwd", txtpwd)
 	http.HandleFunc("/codeconf", codeconf)
 	port := os.Getenv("PORT")
@@ -44,6 +45,19 @@ func main() {
 	}
 	log.Println("listening on 8080")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+}
+
+func logout(w http.ResponseWriter, r *http.Request) {
+	c := &http.Cookie{
+		Name:     "whart",
+		Value:    "",
+		Path:     "/",
+		Expires: time.Unix(0, 0),
+	
+		HttpOnly: true,
+	}
+	http.SetCookie(w, c)
+	w.Write([]byte(`ok`))
 }
 
 func whoami(w http.ResponseWriter, r *http.Request) {

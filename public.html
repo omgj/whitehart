@@ -306,6 +306,18 @@ a:hover {
             font-size: 1.3em;
             font-family: 'Roboto', sans-serif;
 }
+.hset {
+    color: #787878;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
+.hlog {
+    color: #E53935;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2em;
+}
   }
   #instagram {
     font-size: 20px;
@@ -341,13 +353,17 @@ a:hover {
             <div class="col-12 center">
                 <img id="logo" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
             </div>
-            <div id="somewhere" class="col-12 center">
+            <div class="col-12 center">
                 <a id="addre" class="log" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">22 Whitehart Lane, Melbourne</a>
             </div>
         </div>
         <div id="userr">
             <div class="row">
-                <div id="userrs" class="txt center col-12"></div>
+                <div class="txt center col-12">
+                    <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                    <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
+                    <span id="userrs" class="txt"></span>
+                </div>
             </div>
         </div>
         <div id="somewhere" class="row justify-content-center">
@@ -395,16 +411,28 @@ a:hover {
         </div>
         <div id="userbod">
             <div class="row">
-                <div class="col-3 txt">20/8</div>
-                <div class="col-3 txt">$100.12</div>
-                <div class="col-3 txt">4</div>
-                <div class="col-3 txt"><i class="fab fa-cc-visa"></i> 3847</div>
+                <div id="settingsb" class="col-6 hset center">SETTINGS</div>
+                <div id="logoutb" class="col-6 hlog center">LOGOUT</div>
             </div>
-            <div class="row">
-                <div class="col-3 txt">24/8</div>
-                <div class="col-3 txt">$13.12</div>
-                <div class="col-3 txt">4</div>
-                <div class="col-3 txt"><i class="fab fa-cc-mastercard"></i> 7656</div>
+            <div id="settingslist">
+                <div class="row">
+                    <div class="col-6 left txt">NUMBER</div>
+                    <div class="col-6 right txt">0413123123</div>
+                </div>
+            </div>
+            <div id="txhistory">
+                <div class="row">
+                    <div class="col-2 txt">20/8</div>
+                    <div class="col-4 txt">$100.12</div>
+                    <div class="col-2 txt">4</div>
+                    <div class="col-4 txt"><i class="fab fa-cc-visa"></i> 3847</div>
+                </div>
+                <div class="row">
+                    <div class="col-2 txt">24/8</div>
+                    <div class="col-4 txt">$13.12</div>
+                    <div class="col-2 txt">4</div>
+                    <div class="col-4 txt"><i class="fab fa-cc-mastercard"></i> 7656</div>
+                </div>
             </div>
         </div>
         <div id="pub">
@@ -418,10 +446,6 @@ a:hover {
                     <p class="abcde center">But you don't have to worry about any of that because in Melbourne, it means only one thing - an all encompassing gathering space with great music, the finest craft beers and cocktails, boutique wines, great food and a kaleidoscopic visual feast of projections and graffiti.</p>
                     <p class="abcde center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p> 
                     <p class="abcde center">Melbournes CBD now has a WHITE HART.</p>  
-                </div>
-                <div class="col-12 center">
-                    <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                    <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
                 </div>
             </div>
         </div>
@@ -453,6 +477,30 @@ a:hover {
                 console.log(err);
             });
         };
+        $("#logoutb").click(function() {
+            fetch("/logout", {
+                method: "get",
+            }).then(function(response) {
+                if (response.status !== 200) {
+                    console.log("error");
+                    return;
+                }
+
+                response.text().then(function(text) {
+                    if (text == "ok") {
+                        location.reload(true);
+                        return;
+                    }
+                    console.log(text);
+                })
+            }).catch(function(err) {
+                console.log(err);
+            });
+        });
+        $("#settingsb").click(function() {
+            $("#txhistory").hide();
+            $("#settingslist").show();
+        });
         $("#userbod").hide();
         $("#userrs").click(function() {
             $("#pub").hide();
@@ -460,16 +508,19 @@ a:hover {
             $("#eventsbody").hide();
             $("#menubody").hide();
             $("#userbod").show();
+            $("#settingslist").hide();
         });
         $("#numuser").keyup(function() {
             var a = $("#numuser").val();
             if ((a.length == 10) && (a.includes("04"))) {
                 $("#classy").show();
+                return;
             }
+            $("#classy").hide();
         })
         $("#classy").hide();
         $("#pwdr").hide();
-        $("#codeconf").click(function() {
+        $("#codeconfirm").click(function() {
             var a = $("#regp").val();
             var num = $("#numuser").val();
             var aa = new FormData();
@@ -577,27 +628,31 @@ a:hover {
     $("#eventsbody").hide();
 
     $("#logo").click(function() {
-        $("#pub").show();
         $("#musicbody").hide();
         $("#menubody").hide();
         $("#eventsbody").hide();
+        $("#userbod").hide();
+        $("#pub").show();
     });
 
     $("#events").click(function() {
         $("#pub").hide();
         $("#musicbody").hide();
         $("#menubody").hide();
+        $("#userbod").hide();
         $("#eventsbody").show();
     });
     $("#menu").click(function() {
         $("#pub").hide();
         $("#musicbody").hide();
+        $("#userbod").hide();
         $("#eventsbody").hide();
         $("#menubody").show();
     });
     $("#music").click(function() {
         $("#pub").hide();
         $("#menubody").hide();
+        $("#userbod").hide();
         $("#eventsbody").hide();
         $("#musicbody").show();
     });
