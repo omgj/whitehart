@@ -81,7 +81,7 @@
             color: ghostwhite;
             font-weight: 100;
             letter-spacing: 2px;
-            font-size: .8em;
+            font-size: 21px;
         }
         .txti {
             color: #717171;
@@ -267,7 +267,14 @@ a:hover {
     font-size: 20px;
 }
   @media (max-width: 500px) {
-
+    #userrs {
+    color: #616161;
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
 #logo {
     height: 30px;
     text-align: center;
@@ -276,15 +283,15 @@ a:hover {
     cursor: pointer;
 }
     #menu {
-        font-size: 21px;
+        font-size: 18px;
         font-weight: 300;
     }
     #music {
-        font-size: 21px;
+        font-size: 18px;
         font-weight: 300;
     }
     #events {
-        font-size: 21px;
+        font-size: 18px;
         font-weight: 300;
     }
     #addre {
@@ -300,6 +307,14 @@ a:hover {
   }
 
   @media (min-width: 501px) {
+    #userrs {
+    color: #616161;
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
     #logo {
     height: 22px;
     text-align: center;
@@ -329,6 +344,7 @@ a:hover {
             font-size: 1.3em;
             font-family: 'Roboto', sans-serif;
 }
+}
 .hset {
     color: #787878;
     font-weight: 300;
@@ -347,12 +363,8 @@ a:hover {
     font-weight: 100;
     cursor: pointer;
 }
-#userrs {
-    color: #616161;
-    font-weight: 300;
-    font-family: 'Roboto', sans-serif;
-    font-size: 21px;
-    cursor: pointer;
+#userrs:hover {
+    color: ghostwhite;
 }
   #instagram {
     font-size: 20px;
@@ -392,11 +404,6 @@ a:hover {
                 <a id="addre" class="log" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">22 Whitehart Lane, Melbourne</a>
             </div>
         </div>
-        <div id="userr">
-            <div class="row">
-                <div id="userrs" class="center col-12"></div>
-            </div>
-        </div>
         <div id="somewhere" class="row justify-content-center">
             <div id="numc" class="col-12 center">
                 <input id="numuser" type="text" autocomplete="off" class="center" placeholder="0480019099" maxlength="10" />
@@ -416,7 +423,8 @@ a:hover {
             <div class="col-12 center">
                 <span id="menu" class="log">MENU</span>&nbsp;&nbsp;
                 <span id="music" class="log">MUSIC</span>&nbsp;&nbsp;
-                <span id="events" class="log">EVENTS</span>
+                <span id="events" class="log">EVENTS</span>&nbsp;&nbsp;
+                <span id="userrs"></span>
             </div>
         </div>
         <div id="menubody">
@@ -441,14 +449,19 @@ a:hover {
             </div>
         </div>
         <div id="userbod">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div id="settingsb" class="col-6 col-md-3 col-lg-2 hset center">SETTINGS</div>
                 <div id="logoutb" class="col-6 col-md-3 col-lg-2 hlog center">LOGOUT</div>
             </div>
             <div id="settingslist">
                 <div class="row justify-content-center">
-                    <div class="col-4 col-md-2 col-lg-1 left txti">NUMBER</div>
-                    <div class="col-8 col-md-3 col-lg-2 right txt">0413123123</div>
+                    <div class="col-8 col-md-5 col-lg-3">
+                        <div class="txti">NUMBER</div>
+                        <div class="txt">0413123123</div>
+                    </div>
+                    <div class="col-4 col-md-2 col-lg-1">
+                        <span class="delcard">DELETE</span>    
+                    </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-4 col-md-2 col-lg-1 left txti">CARD</div>
@@ -511,11 +524,11 @@ a:hover {
                     response.text().then(function(text) {
                         if (text == "none") {
                             $("#somewhere").show();
-                            $("#userr").hide();
+                            $("#userrs").hide();
                             return;
                         }
                         $("#somewhere").hide();
-                        $("#userr").show();
+                        $("#userrs").show();
                         $("#userrs").text(text);
                     });
                 }).catch(function(err) {
@@ -588,11 +601,11 @@ a:hover {
                     }
                     $("#somewhere").hide();
                     $("#pub").hide();
-        $("#musicbody").hide();
-        $("#menubody").hide();
-        $("#eventsbody").hide();
-        $("#userbod").show();
-                    $("#userr").show();
+                    $("#musicbody").hide();
+                    $("#menubody").hide();
+                    $("#eventsbody").hide();
+                    $("#userbod").show();
+                    $("#userrs").show();
                     $("#userrs").text(text);
                 });
             })
