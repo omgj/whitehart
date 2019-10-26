@@ -175,7 +175,7 @@ a {
     font-size: 9px;
 }
 .fas {
-    font-size: 20px;
+    font-size: 27px;
     color: #f2f2f2;
 }
 #unum {
@@ -193,6 +193,11 @@ a {
 }
 #sms:hover {
     font-weight: 400;
+}
+#ucon {
+    color: #66BB6A;
+    font-weight: 300;
+    font-size: 15px;
 }
     </style>
 </head>
@@ -213,11 +218,10 @@ a {
                 <span id="music" class="log com">MUSIC</span>&nbsp;&nbsp;
                 <span id="events" class="log com">EVENTS</span>&nbsp;&nbsp;
                 <input id="unum" class="com" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />
-                <span id="uid" class="com ider"></span>
                 <input id="upwd" type="text" class="com" autocomplete="off" placeholder="219663" maxlength="6" />
                 <span id="usms" class="com">&nbsp;&nbsp;SMS</span>
-                <div id="ucon" class="logb">&nbsp;&nbsp;CONFIRM</div>
-                <span id="ulo" class="hlog com">&nbsp;&nbsp;LOGOUT</span>
+                <span id="ucon" class="com">&nbsp;&nbsp;CONFIRM</span>
+                <span id="uid" class="com ider"></span>
                 <span id="ucart" class="com">$0.00</span>
             </div>
         </div>
@@ -260,6 +264,11 @@ a {
             </div>
         </div>
         <div id="userb">
+            <div class="row">
+                <div class="col-12 center">
+                    <span id="ulo" class="hlog com">&nbsp;&nbsp;LOGOUT</span>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-8 col-md-5 col-lg-3">
                     <div id="userrs" class="txt"></div>
@@ -313,8 +322,8 @@ a {
         </div>
         <div class="row">
             <div class="col-12 center">
-                <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
+                <span id="instagram" class="com"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                <span id="facebook" class="com"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
             </div>
         </div>    
     </div>
@@ -329,7 +338,6 @@ a {
         $("#upwd").hide();
         $("#usms").hide();
         $("#ucon").hide();
-        $("#ulo").hide();
         $("#ucart").hide();
 
         $("#musicb").hide();
