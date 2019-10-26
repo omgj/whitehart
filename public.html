@@ -393,22 +393,31 @@ a:hover {
                 </div>
             </div>
         </div>
+        <div id="userbod">
+            <div class="row">
+                <div class="col-3 txt">20/8</div>
+                <div class="col-3 txt">$100.12</div>
+                <div class="col-3 txt">4</div>
+                <div class="col-3 txt"><i class="fab fa-cc-visa"></i> 3847</div>
+            </div>
+            <div class="row">
+                <div class="col-3 txt">24/8</div>
+                <div class="col-3 txt">$13.12</div>
+                <div class="col-3 txt">4</div>
+                <div class="col-3 txt"><i class="fab fa-cc-mastercard"></i> 7656</div>
+            </div>
+        </div>
         <div id="pub">
             <div class="row">
                 <div class="col-12">&nbsp;</div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 center">
-                    
                     <p class="abcde center">The white hart has always been a creature of myth and legend.</p>
-
                     <p class="abcde center">The ancient Celts saw it as a harbinger of doom. The French believed that to harm a white hart meant to be eternally cursed with the pain of unrequited love. The Scots saw it as a symbol of purity, redemption and good fortune.</p>
-                        
-                        <p class="abcde center">But you don't have to worry about any of that because in Melbourne, it means only one thing - an all encompassing gathering space with great music, the finest craft beers and cocktails, boutique wines, great food and a kaleidoscopic visual feast of projections and graffiti.</p>
-                        
-                        <p class="abcde center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p>
-                        
-                        <p class="abcde center">Melbournes CBD now has a WHITE HART.</p>  
+                    <p class="abcde center">But you don't have to worry about any of that because in Melbourne, it means only one thing - an all encompassing gathering space with great music, the finest craft beers and cocktails, boutique wines, great food and a kaleidoscopic visual feast of projections and graffiti.</p>
+                    <p class="abcde center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p> 
+                    <p class="abcde center">Melbournes CBD now has a WHITE HART.</p>  
                 </div>
                 <div class="col-12 center">
                     <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
@@ -420,6 +429,14 @@ a:hover {
     </div>
 
     <script>
+        $("#userbod").hide();
+        $("#userrs").click(function() {
+            $("#pub").hide();
+        $("#musicbody").hide();
+        $("#eventsbody").hide();
+        $("#menubody").hide();
+        $("#userbod").show();
+        });
         $("#numuser").keyup(function() {
             var a = $("#numuser").val();
             if ((a.length == 10) && (a.includes("04"))) {
@@ -451,6 +468,11 @@ a:hover {
                         return;
                     }
                     $("#somewhere").hide();
+                    $("#pub").hide();
+        $("#musicbody").hide();
+        $("#menubody").hide();
+        $("#eventsbody").hide();
+        $("#userbod").show();
                     $("#userr").show();
                     $("#userrs").text(text);
                 });
