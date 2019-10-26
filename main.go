@@ -103,7 +103,7 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := "+61"+r.FormValue("numuser")[1:]
 	log.Println("confirming: ", num)
-	dd, er := fs.Collection("people").Doc(num).Get(context.Background())
+	_, er := fs.Collection("people").Doc(num).Get(context.Background())
 	code := sendSms(num)
 	if er != nil {
 		_, e := fs.Collection("people").Doc(num).Set(context.Background(), map[string]interface{}{
