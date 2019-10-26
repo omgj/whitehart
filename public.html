@@ -10,271 +10,41 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/f34ab3dac3.js"></script>
-    <script src="https://js.stripe.com/v3/"></script>
 
     <style>
-        body {
-            background-color: #222;
-        }
-        .left {
-            text-align: left;
-        }
-        .center {
-            text-align: center;
-        }
-        .right {
-            text-align: right;
-        }
-        *:focus {
-            outline: none;
-        }
-        input {
-            background-color: #222;
-            font-weight: 100;
-            color: ghostwhite;
-            border: none;
-            font-family: 'Roboto', sans-serif;
-            width: 100%;
-            letter-spacing: 1.5px;
-        }
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            margin: 0; 
-        }
-        .redder {
-            color: #E57373;
-        }
-        .greener {
-            color: #81C784;
-        }
-        .clicker {
-            cursor: pointer;
-        }
-        .robo {
-            font-family: 'Roboto', sans-serif;
-        }
-        .menutypesitem {
-            font-family: 'Roboto', sans-serif;
-            color: ghostwhite;
-            font-weight: 300;
-            font-size: .9em;
-            letter-spacing: 1px;
-        }
-        .uname {
-            color: #777;
-            font-weight: 100;
-            letter-spacing: 1px;
-            font-size: .7em;
-        }
-
-        .cart {
-            color: #777;
-            font-weight: 100;
-            letter-spacing: 2px;
-            font-size: .7em;
-        }
-
-        .txt {
-            color: ghostwhite;
-            font-weight: 100;
-            letter-spacing: 2px;
-            font-size: 21px;
-        }
-        .txti {
-            color: #717171;
-            font-weight: 100;
-            letter-spacing: 1px;
-            font-size: .8em;
-        }
-        .txty {
-            color: #FDD835;
-            font-weight: 100;
-            letter-spacing: 1px;
-            font-size: .8em;
-        }
-.bigger {
-    width: 100%;
+body {
+    background-color: #222;
 }
-.headerow {
-    margin-bottom: 6px;
-    margin-top: 4px;
+.left {
+    text-align: left;
 }
-a { color: inherit; } 
-a:hover {
-    text-decoration: none;
+.center {
+    text-align: center;
+}
+.right {
+    text-align: right;
+}
+*:focus {
+    outline: none;
+}
+input {
+    background-color: #222;
+    font-weight: 100;
     color: ghostwhite;
-    font-weight: 400;
-}
-.imgmain {
+    border: none;
+    font-family: 'Roboto', sans-serif;
     width: 100%;
+    letter-spacing: 1.5px;
 }
-.imgcol {
-    padding-left: 0px;
-    padding-right: 0px;
-}
-
-#loginfo {
-    color: #818181;
-    font-weight: 100;
-}
-
-.unameerr {
-    font-size: .6em;
-    color: #ef9a9a;
-    font-weight: 100;
-    font-family: 'Roboto', sans-serif;
-}
-.regbut {
-    color: #ef9a9a;
-    font-size: .7em;
-    font-weight: 100;
-    cursor: pointer;
-    letter-spacing: 2px;
-}
-.regbut:hover {
-    font-weight: 400;
-    color: #e53935;
-}
-.logbut:hover {
-    font-weight: 400;
-    color: #388e3c;
-}
-.logbut {
-    color: #81c784;
-    font-size: .7em;
-    font-weight: 100;
-    cursor: pointer;
-    letter-spacing: 2px;
-}
-.txtbut {
-    color: #414141;
-    font-size: .7em;
-    font-weight: 100;
-    cursor: pointer;
-    letter-spacing: 2px;
-}
-.txtbut:hover {
-    font-weight: 400;
-    color: #666;
-}
-.active {
-    color: #777;
-    font-weight: 400;
-}
-.authblock {
-    margin-bottom: 15px;
-}
-.authblock:hover {
-    border-left: 1px solid #555;
-}
-.authselected {
-    border-left: 1px solid #555;
-}
-#sendcode {
-    font-weight: 100;
-    font-family: 'Roboto', sans-serif;
-    font-size: .8em;
-    color: #888;
-    padding-top: 8px;
-    cursor: pointer;
-}
-#sendcode:hover {
-    color: #81c784;
-}
-#regutxt {
-    color: #515151;
-}
-#regptxt {
-    color: #515151;
-}
-#regp::placeholder {
-    color: #414141;
-}
-#regu::placeholder {
-    color: #414141;
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
 
-.logbc {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.logb {
-    color: #81c784;
-    padding: 10px;
-    font-weight: 100;
-    letter-spacing: 3px;
-    font-size: 12px;
-    cursor: pointer;
-}
-.logba {
-    color: #525252;
-    padding: 10px;
-    font-weight: 100;
-    letter-spacing: 3px;
-    font-size: 12px;
-    cursor: pointer;
-}
-.logb:hover {
-    font-weight: 400;
-}
-
-.log {
-            color: ghostwhite;
-            font-weight: 100;
-            letter-spacing: 2px;
-            font-size: .8em;
-            cursor: pointer;
-            font-family: 'Roboto', sans-serif;
-            padding-top: 1px;
-}
-.log:hover {
-    font-weight: 300;
-}
-
-.underpwd {
-    font-size: .5em;
-    color: #616161 !important;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    letter-spacing: 1px;
-}
-.underpwdactive {
-    font-size: .5em;
-    color: #999999 !important;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    letter-spacing: 1px;
-}
-        .navtop:hover {
-            font-weight: 400;
-        }
-#numuser::placeholder {
-    color: #414141;
-    font-size: 20px;
-}
-#numuser {
-    font-size: 21px;
-}
-#emin {
-    color: #414141;
-    font-size: 21px;
-}
-#emin::placeholder {
-    color: #414141;
-    font-size: 20px;
-}
-  @media (max-width: 500px) {
-    #userrs {
-    color: #616161;
-    font-weight: 100;
-    font-family: 'Roboto', sans-serif;
-    font-size: 18px;
-    cursor: pointer;
-    letter-spacing: 2px;
-}
+ @media (max-width: 500px) {
 #logo {
     height: 30px;
     text-align: center;
@@ -282,7 +52,7 @@ a:hover {
     margin-bottom: 8px;
     cursor: pointer;
 }
-    #menu {
+#menu {
         font-size: 18px;
         font-weight: 300;
     }
@@ -294,9 +64,7 @@ a:hover {
         font-size: 18px;
         font-weight: 300;
     }
-    #addre {
-        font-size: 15px;
-    }
+    
     .abcde {
             color: ghostwhite;
             font-weight: 100;
@@ -304,17 +72,8 @@ a:hover {
             font-size: 1em;
             font-family: 'Roboto', sans-serif;
 }
-  }
-
-  @media (min-width: 501px) {
-    #userrs {
-    color: #616161;
-    font-weight: 100;
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    cursor: pointer;
-    letter-spacing: 2px;
 }
+  @media (min-width: 501px) {
     #logo {
     height: 22px;
     text-align: center;
@@ -322,7 +81,7 @@ a:hover {
     margin-bottom: 8px;
     cursor: pointer;
 }
-    #menu {
+#menu {
         font-size: 15px;
         font-weight: 300;
     }
@@ -345,18 +104,60 @@ a:hover {
             font-family: 'Roboto', sans-serif;
 }
 }
-.hset {
-    color: #43A047;
+#addre {
+    font-size: 16px;
+    color: ghostwhite;
+    font-weight: 100;
+}
+#addre:hover {
     font-weight: 300;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1em;
-    letter-spacing: 2px;
 }
 .hlog {
     color: #E53935;
+    font-weight: 100;
+    font-size: .9em;
+}
+.log {
+    color: ghostwhite;
+    font-weight: 100;
+    font-size: 18px;
+}
+.log:hover {
     font-weight: 300;
+}
+.com {
+    letter-spacing: 2px;
+    cursor: pointer;
     font-family: 'Roboto', sans-serif;
-    font-size: 1em;
+}
+#cart {
+    font-size: 15px;
+    color: #818181;
+    font-weight: 100;
+}
+#numuser::placeholder {
+    color: #414141;
+    font-size: 18px;
+}
+#numuser {
+    font-size: 18px;
+    width: 150px;
+}
+#regp, #regp::placeholder {
+    font-size: 18px;
+    color: #414141;
+    font-weight: 100;
+}
+.ider {
+    font-size: 16px;
+    color: ghostwhite;
+    font-weight: 100;
+}
+.hlog {
+    color: #E53935;
+    font-weight: 100;
+    font-family: 'Roboto', sans-serif;
+    font-size: .9em;
     letter-spacing: 2px;
 }
 .delcard {
@@ -374,120 +175,90 @@ a:hover {
 #facebook {
     font-size: 20px;
 }
-#numuser {
-    font-size: 1.5em;
-}
-#regp {
-    font-size: 1.5em;
-}
-#classy {
-    padding-top: 5px;
-}
-#codeconf {
-    margin-bottom: -20px;
-}
-#codeconfirm {
-    margin-top: -8px;
-}
     </style>
 </head>
 <body>
     <div class="container-fluid">
-
         <!-- HEADER -->
         <div class="row">
             <div class="col-12 center">
                 <img id="logo" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
             </div>
             <div class="col-12 center">
-                <a id="addre" class="log" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">22 Whitehart Lane, Melbourne</a>
+                <a id="addre" class="com" href="https://www.google.com/maps/search/?api=1&query=whitehart+bar">22 Whitehart Lane, Melbourne</a>
             </div>
         </div>
         <div class="row">
             <div class="col-12 center">
-                <span id="menu" class="log">MENU</span>&nbsp;&nbsp;
-                <span id="music" class="log">MUSIC</span>&nbsp;&nbsp;
-                <span id="events" class="log">EVENTS</span>&nbsp;&nbsp;
-                <span id="userrs"></span>
+                <span id="menu" class="log com">MENU</span>&nbsp;&nbsp;
+                <span id="music" class="log com">MUSIC</span>&nbsp;&nbsp;
+                <span id="events" class="log com">EVENTS</span>&nbsp;&nbsp;
+                <span id="uid" class="com ider"></span>&nbsp;&nbsp;
+                <input id="unum" class="com" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />&nbsp;&nbsp;
+                <input id="upwd" type="text" class="com" autocomplete="off" placeholder="219663" maxlength="6" />&nbsp;&nbsp;
+                <span id="usms" class="logb">SMS</span>&nbsp;&nbsp;
+                <div id="ucon" class="logb">CONFIRM</div>&nbsp;&nbsp;
+                <span id="ulo" class="hlog com">LOGOUT</span>&nbsp;&nbsp;
+                <span id="ucart" class="com">$0.00</span>
             </div>
         </div>
-        <div id="somewhere" class="row justify-content-center">
-            <div id="numc" class="col-12 center">
-                <input id="numuser" type="text" autocomplete="off" class="center" placeholder="0480019099" maxlength="10" />
-            </div>
-            <div id="pwdr" class="col-12 center">
-                    <input id="regp" type="text" class="center" autocomplete="off" placeholder="219663" maxlength="6" />
-            </div>
-            <div id="classy" class="col-12 center">
-                <span id="log" class="logb">SMS</span>
-            </div>
-            <div id="codeconfirm" class="col-12 center">
-                <div id="codeconf" class="logb">CONFIRM</div>
-                <div id="numfin" class="logba"></div>
-            </div>
-        </div>
-        <div id="menubody">
+        <div id="menub">
             <div class="row">
                 <div class="col-12">
                     <span class="log">Menu</span>
                 </div>
             </div>
         </div>
-        <div id="musicbody">
+        <div id="musicb">
             <div class="row">
                 <div class="col-12">
                     <span class="log">music</span>
                 </div>
             </div>
         </div>
-        <div id="eventsbody">
+        <div id="eventsb">
             <div class="row">
                 <div class="col-12">
                     <span class="log">events</span>
                 </div>
             </div>
         </div>
-        <div id="userbod">
+        <div id="userb">
             <div class="row justify-content-center">
-                <div id="settingsb" class="col-6 col-md-3 col-lg-2 hset center">SETTINGS</div>
-                <div id="logoutb" class="col-6 col-md-3 col-lg-2 hlog center">LOGOUT</div>
-            </div>
-            <div id="settingslist">
-                <div class="row justify-content-center">
-                    <div class="col-8 col-md-5 col-lg-3">
-                        <div class="txt">0413123123</div>
-                        <div class="txti">NUMBER</div>
-                    </div>
-                    <div class="col-4 col-md-2 col-lg-1">
-                        <span class="delcard">DELETE</span>    
-                    </div>
+                <div class="col-8 col-md-5 col-lg-3">
+                    <div id="userrs" class="txt"></div>
+                    <div class="txti">NUMBER</div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-8 col-md-5 col-lg-3">
-                        <div class="txt"><i class="fab fa-cc-mastercard"></i> 7656 </div>
-                        <div class="txti">CARD</div>
-                    </div>
-                    <div class="col-4 col-md-2 col-lg-1">
-                        <span class="delcard">DELETE</span>    
-                    </div>
+                <div class="col-4 col-md-2 col-lg-1">
+                    <span class="delcard">DELETE</span>    
                 </div>
             </div>
-            <div id="txhistory">
-                <div class="row">
-                    <div class="col-2 txti">
-                        <div class="txty">Mon</div>
-                        <div id="txti">20.2</div>
-                    </div>
-                    <div class="col-4 txt">$100.12</div>
-                    <div class="col-2 txt">4</div>
-                    <div class="col-4 txt"><i class="fab fa-cc-visa"></i> 3847</div>
+            <div class="row">
+                <div class="col-12">&nbsp;</div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-8 col-md-5 col-lg-3">
+                    <div class="txt"><i class="fab fa-cc-mastercard"></i> 7656 </div>
+                    <div class="txti">CARD</div>
                 </div>
-                <div class="row">
-                    <div class="col-2 txt">24/8</div>
-                    <div class="col-4 txt">$13.12</div>
-                    <div class="col-2 txt">4</div>
-                    <div class="col-4 txt"><i class="fab fa-cc-mastercard"></i> 7656</div>
+                <div class="col-4 col-md-2 col-lg-1">
+                    <span class="delcard">DELETE</span>    
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-2 txti">
+                    <div class="txty">Mon</div>
+                    <div id="txti">20.2</div>
+                </div>
+                <div class="col-4 txt">$100.12</div>
+                <div class="col-2 txt">4</div>
+                <div class="col-4 txt"><i class="fab fa-cc-visa"></i> 3847</div>
+            </div>
+            <div class="row">
+                <div class="col-2 txtl">24/8</div>
+                <div class="col-4 txtl">$13.12</div>
+                <div class="col-2 txtl">4</div>
+                <div class="col-4 txtl"><i class="fab fa-cc-mastercard"></i> 7656</div>
             </div>
         </div>
         <div id="pub">
@@ -502,43 +273,161 @@ a:hover {
                     <p class="abcde center">Located in the heart of the city in a converted car park at the end of Whitehart Lane is a unique green zone with an industrial edge – a place to party, or just relax and talk at the end of the day.</p> 
                     <p class="abcde center">Melbournes CBD now has a WHITE HART.</p>  
                 </div>
-                <div class="col-12 center">
-                        <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                        <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
-                </div>
             </div>
         </div>
-        
+        <div class="row">
+            <div class="col-12 center">
+                <span id="instagram" class="log"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                <span id="facebook" class="log"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
+            </div>
+        </div>    
     </div>
 
     <script>
-        var menufetched = false;
-        $("#somewhere").hide();
+
+        $("#upwd").hide();
+        $("#logoutb").hide();
+        $("#cart").hide();
+        $("#uid").hide();
+        $("#unum").hide();
+        $("#upwd").hide();
+        $("#usms").hide();
+        $("#ucon").hide();
+        $("#ulo").hide();
+        $("#ucart").hide();
+
         window.onload = function() {
             fetch("/whoami", {
                 method: "get",
-            }).then(
-                function(response) {
-                    if (response.status !== 200) {
-                        console.log("error");
+            }).then(function(response) {
+                if (response.status !== 200) {
+                    console.log("error");
+                    return;
+                }
+                response.text().then(function(text) {
+                    if (text == "none") {
+                        $("#unum").show();
                         return;
                     }
-
-                    response.text().then(function(text) {
-                        if (text == "none") {
-                            $("#somewhere").show();
-                            $("#userrs").hide();
-                            return;
-                        }
-                        $("#somewhere").hide();
-                        $("#userrs").show();
-                        $("#userrs").text(text);
-                    });
-                }).catch(function(err) {
+                    $("#ucart").show()
+                    $("#ulo").show()
+                    $("#uid").show();
+                    $("#uid").text(text);
+                });
+            }).catch(function(err) {
                 console.log(err);
             });
         };
-        $("#logoutb").click(function() {
+
+        $("#unum").keyup(function() {
+            var a = $("#unum").val();
+            if ((a.length == 10) && (a.includes("04"))) {
+                $("#usms").show();
+                return;
+            }
+            $("#usms").hide();
+        });
+        $("#upwd").keyup(function() {
+            var a = $("#upwd").val();
+            if (a.length==6) {
+                $("#ucon").show();
+                return;
+            }
+            $("#ucon").hide();
+        });
+
+        $("#logo").click(function() {
+            $("#musicb").hide();
+            $("#menub").hide();
+            $("#eventsb").hide();
+            $("#userb").hide();
+            $("#pub").show();
+        });
+        $("#events").click(function() {
+            $("#pub").hide();
+            $("#musicb").hide();
+            $("#menub").hide();
+            $("#userb").hide();
+            $("#eventsb").show();
+        });
+        $("#menu").click(function() {
+            $("#pub").hide();
+            $("#musicb").hide();
+            $("#userb").hide();
+            $("#eventsb").hide();
+            $("#menub").show();
+        });
+        $("#music").click(function() {
+            $("#pub").hide();
+            $("#menub").hide();
+            $("#userb").hide();
+            $("#eventsb").hide();
+            $("#musicb").show();
+        });
+        $("#uid").click(function() {
+            $("#pub").hide();
+            $("#musicb").hide();
+            $("#eventsb").hide();
+            $("#menub").hide();
+            $("#userb").show();
+        });
+        $("#usms").click(function() {
+            var num = $("#unum").val();
+            if (num.includes("04") && num.length == 10) {
+                $("#upwd").show();
+                var formdata = new FormData();
+                formdata.append("numuser", num);
+                fetch("/txtpwd", {
+                    method: "post",
+                    body: formdata,
+                }).then(function(response) {
+                    if (response.status !== 200) {
+                        console.log("problem: "+response.Status);
+                        return;
+                    }
+                    response.text().then(function(text) {
+                        if (text == "err") {
+                            console.log("error");
+                            return;
+                        }
+                        $("#unum").hide();
+                        $("#upwd").show();
+                    });
+                }).catch(function(err) {
+                    console.log(err);
+                    return;
+                });
+                return;
+            }
+            $("#unum").focus();
+        });
+        $("#ucon").click(function() {
+            var a = $("#upwd").val();
+            var num = $("#unum").val();
+            var aa = new FormData();
+            aa.append("number", num);
+            aa.append("code", a);
+            fetch("/codeconf", {
+                method: "post",
+                body: aa,
+            }).then(function(response) {
+                if (response.status !== 200) {
+                    console.log("error");
+                    return;
+                }
+                response.text().then(function(text) {
+                    if (text == "err") {
+                        console.log("err");
+                        return;
+                    }
+                    location.reload(true);
+                });
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+        });
+        $("#ulo").click(function() {
             fetch("/logout", {
                 method: "get",
             }).then(function(response) {
@@ -546,7 +435,6 @@ a:hover {
                     console.log("error");
                     return;
                 }
-
                 response.text().then(function(text) {
                     if (text == "ok") {
                         location.reload(true);
@@ -558,166 +446,6 @@ a:hover {
                 console.log(err);
             });
         });
-        $("#settingsb").click(function() {
-            $("#txhistory").hide();
-            $("#settingslist").show();
-        });
-        $("#userbod").hide();
-        $("#userrs").click(function() {
-            $("#pub").hide();
-            $("#musicbody").hide();
-            $("#eventsbody").hide();
-            $("#menubody").hide();
-            $("#userbod").show();
-            $("#settingslist").hide();
-        });
-        $("#numuser").keyup(function() {
-            var a = $("#numuser").val();
-            if ((a.length == 10) && (a.includes("04"))) {
-                $("#classy").show();
-                return;
-            }
-            $("#classy").hide();
-        })
-        $("#classy").hide();
-        $("#pwdr").hide();
-        $("#codeconfirm").click(function() {
-            var a = $("#regp").val();
-            var num = $("#numuser").val();
-            var aa = new FormData();
-            aa.append("number", num);
-            aa.append("code", a);
-            fetch("/codeconf", {
-                method: "post",
-                body: aa,
-            }).then(
-                function(response) {
-                if (response.status !== 200) {
-                    console.log("error");
-                    return;
-                }
-
-                response.text().then(function(text) {
-                    if (text == "err") {
-                        console.log("err");
-                        return;
-                    }
-                    $("#somewhere").hide();
-                    $("#pub").hide();
-                    $("#musicbody").hide();
-                    $("#menubody").hide();
-                    $("#eventsbody").hide();
-                    $("#userbod").show();
-                    $("#userrs").show();
-                    $("#userrs").text(text);
-                });
-            })
-            .catch(function(err) {
-                console.log(err);
-            });
-        });
-        $("#codeconfirm").hide();
-        $("#log").click(function() {
-            var num = $("#numuser").val();
-            if (num.includes("04") && num.length == 10) {
-                $("#regp").focus();
-                var formdata = new FormData();
-
-            formdata.append("numuser", num);
-            fetch("/txtpwd", {
-                method: "post",
-                body: formdata,
-            }).then(
-                function(response) {
-                    if (response.status !== 200) {
-                        console.log("problem: "+response.Status);
-                        return;
-                    }
-
-                    response.text().then(function(text) {
-                        if (text == "log") {
-                            $("#numc").hide();
-                            $("#pwdr").show();
-                            $("#classy").hide();
-                            $("#codeconfirm").show();
-                            var are = $("#numuser").val();
-                            $("#numfin").text(are);
-                        }
-                        if (text == "reg") {
-                            $("#numc").hide();
-                            $("#pwdr").show();
-                            $("#classy").hide();
-                            $("#codeconfirm").show();
-                            var are = $("#numuser").val();
-                            $("#numfin").text(are);
-                        }
-                        if (text == "err") {
-                            console.log("error");
-                        }
-                    });
-                }
-            )
-            .catch(function(err) {
-                console.log(err);
-            });
-                return
-            }
-
-            $("#numuser").focus();
-        });
-        $("#numshow").hide();
-        $("#numuser").focusin(function() {
-            $("#regutxt").removeClass("underpwd");
-            $("#regutxt").addClass("underpwdactive");
-        }).focusout(function() {
-            $("#regutxt").removeClass("underpwdactive");
-            $("#regutxt").addClass("underpwd");
-        });
-        $("#regp").focusin(function() {
-            $("#regptxt").removeClass("underpwd");
-            $("#regptxt").addClass("underpwdactive");
-        }).focusout(function() {
-            $("#regptxt").removeClass("underpwdactive");
-            $("#regptxt").addClass("underpwd");
-        });
-        $("#pcontainer").hide();
-        $("#txtbut").click(function() {
-        });
-
-    $("#menubody").hide();
-    $("#musicbody").hide();
-    $("#eventsbody").hide();
-
-    $("#logo").click(function() {
-        $("#musicbody").hide();
-        $("#menubody").hide();
-        $("#eventsbody").hide();
-        $("#userbod").hide();
-        $("#pub").show();
-    });
-
-    $("#events").click(function() {
-        $("#pub").hide();
-        $("#musicbody").hide();
-        $("#menubody").hide();
-        $("#userbod").hide();
-        $("#eventsbody").show();
-    });
-    $("#menu").click(function() {
-        $("#pub").hide();
-        $("#musicbody").hide();
-        $("#userbod").hide();
-        $("#eventsbody").hide();
-        $("#menubody").show();
-    });
-    $("#music").click(function() {
-        $("#pub").hide();
-        $("#menubody").hide();
-        $("#userbod").hide();
-        $("#eventsbody").hide();
-        $("#musicbody").show();
-    });
-
     </script>
 </body>
 </html>
