@@ -35,6 +35,7 @@ func init() {
 
 func main() {
 	http.HandleFunc("/", public)
+	http.HandleFunc("/whoami", whoami)
 	http.HandleFunc("/txtpwd", txtpwd)
 	http.HandleFunc("/codeconf", codeconf)
 	port := os.Getenv("PORT")
@@ -43,6 +44,23 @@ func main() {
 	}
 	log.Println("listening on 8080")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+}
+
+func whoami(w http.ResponseWriter, r *http.Request) {
+	c, e := r.Cookie("whart")
+	if e != nil {
+		w.Write([]byte(`none`))
+		return
+	}
+	sessionsecret := os.Getenv("SESHSECRET")
+	q, er := fs.Collection("sessions").Doc(c.Value+sessionsecret).Get(context.Background())
+	if er != nil {
+		w.Write([]byte(`none`))
+		return
+	}
+	mm := q.Data()
+	user := mm["user"].(string)
+	w.Write([]byte(user))
 }
 
 func codeconf(w http.ResponseWriter, r *http.Request) {
@@ -85,12 +103,28 @@ func codeconf(w http.ResponseWriter, r *http.Request) {
 func txtpwd(w http.ResponseWriter, r *http.Request) {
 	num := "+61"+r.FormValue("numuser")[1:]
 	log.Println("confirming: ", num)
+	dd, er := fs.Collection("people").Doc(num).Get(context.Background())
 	code := sendSms(num)
-	_, e := fs.Collection("people").Doc(num).Set(context.Background(), map[string]interface{}{
-		"codevalidity": int(time.Now().Unix()),
-		"code": code,
-	})
-	if e != nil {
+	if er != nil {
+		_, e := fs.Collection("people").Doc(num).Set(context.Background(), map[string]interface{}{
+			"codevalidity": int(time.Now().Unix()),
+			"code": code,
+			"role": "customer",
+		})
+		if e != nil {
+			w.Write([]byte(`err`))
+			return
+		}
+		w.Write([]byte(`log`))
+		return
+	}
+	_, err := fs.Collection("people").Doc(num).Update(context.Background(, []firestore.Update{{Path: "code", Value: code}})
+	if err != nil {
+		w.Write([]byte(`err`))
+		return
+	}
+	_, errr := fs.Collection("people").Doc(num).Update(context.Background(, []firestore.Update{{Path: "codevalidity", Value: int(time.Now().Unix())}})
+	if errr != nil {
 		w.Write([]byte(`err`))
 		return
 	}
@@ -130,20 +164,6 @@ func sendSms(to string) string {
 }
 
 func public(w http.ResponseWriter, r *http.Request) {
-	c, e := r.Cookie("whart")
-	if e != nil {
-		a, _ := ioutil.ReadFile("public.html")
-		io.WriteString(w, string(a))
-		return
-	}
-	sessionsecret := os.Getenv("SESHSECRET")
-	q, er := fs.Collection("sessions").Doc(c.Value+sessionsecret).Get(context.Background())
-	if er != nil {
-		aaaa, _ := ioutil.ReadFile("public.html")
-		io.WriteString(w, string(aaaa))
-		log.Println("session not created")
-	}
-	mm := q.Data()
-	log.Println(mm["user"].(string))
-	io.WriteString(w, mm["user"].(string))
+	a, _ := ioutil.ReadFile("public.html")
+	io.WriteString(w, string(a))
 }
