@@ -118,12 +118,12 @@ func txtpwd(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(`log`))
 		return
 	}
-	_, err := fs.Collection("people").Doc(num).Update(context.Background(, []firestore.Update{{Path: "code", Value: code}})
+	_, err := fs.Collection("people").Doc(num).Update(context.Background(), []firestore.Update{{Path: "code", Value: code}})
 	if err != nil {
 		w.Write([]byte(`err`))
 		return
 	}
-	_, errr := fs.Collection("people").Doc(num).Update(context.Background(, []firestore.Update{{Path: "codevalidity", Value: int(time.Now().Unix())}})
+	_, errr := fs.Collection("people").Doc(num).Update(context.Background(), []firestore.Update{{Path: "codevalidity", Value: int(time.Now().Unix())}})
 	if errr != nil {
 		w.Write([]byte(`err`))
 		return
