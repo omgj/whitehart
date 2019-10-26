@@ -164,6 +164,7 @@ func sendSms(to string) string {
 }
 
 func public(w http.ResponseWriter, r *http.Request) {
+	log.Println(r.RemoteAddr)
 	a, _ := ioutil.ReadFile("public.html")
 	io.WriteString(w, string(a))
 }
