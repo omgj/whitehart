@@ -171,14 +171,14 @@ a {
 .abcdef {
     color: ghostwhite;
     font-weight: 100;
-    font-size: 9px;
+    font-size: 15px;
 }
 .fas, .fab {
     font-size: 27px;
     color: #f2f2f2;
 }
 #unum {
-    width: 110px;
+    width: 130px;
     cursor: text;
 }
 #upwd {
@@ -200,8 +200,17 @@ a {
 }
 .txtl {
     color: ghostwhite;
-    font-size: 16px;
+    font-size: 12.5px;
     font-weight: 100;
+}
+#ucart {
+    color: #616161;
+    font-weight: 100;
+    font-size: 16px;
+}
+#cardlist {
+    font-size: 12px;
+    color: ghostwhite;
 }
     </style>
 </head>
@@ -231,26 +240,12 @@ a {
         </div>
         <div id="menub">
             <div class="row justify-content-center">
-                <div class="col-2 col-lg-1 col-md-1 center">
-                    <div><i class="fas fa-beer"></i></div> 
-                    <div class="abcdef com">Beer</div> 
-                </div>
-                <div class="col-2 col-lg-1 col-md-1 center">
-                    <div><i class="fas fa-wine-glass-alt"></i></div> 
-                    <div class="abcdef com">Wine</div> 
-                </div>
-                <div class="col-3 col-lg-1 col-md-1 center">
-                    <div><i class="fas fa-cocktail"></i></div> 
-                    <div class="abcdef com">Cocktails</div> 
-                </div>
-                <div class="col-2 col-lg-1 col-md-1 center">
-                    <div><i class="fas fa-ghost"></i></div> 
-                    <div class="abcdef com">Spirits</div> 
-                </div>
-                <div class="col-2 col-lg-1 col-md-1 center">
-                    <div><i class="fas fa-utensils"></i></div> 
-                    <div class="abcdef com">Eat</div> 
-                </div>
+                    <span class="abcdef com">Beer</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Wine</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Cocktails</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Spirits</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Bottles & Cans</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Eat</span>
             </div>
         </div>
         <div id="musicb">
@@ -298,7 +293,7 @@ a {
                 <div class="col-2 txtl com">24/8</div>
                 <div class="col-4 txtl com">$13.12</div>
                 <div class="col-2 txtl com">4</div>
-                <div class="col-4 txtl com"><i class="fab fa-cc-mastercard"></i> 7656</div>
+                <div class="col-4 txtl com"><i id="cardlist" class="fab fa-cc-mastercard"></i> 7656</div>
             </div>
         </div>
         <div id="pub">
