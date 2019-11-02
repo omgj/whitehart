@@ -79,7 +79,7 @@ func cardtoken(w http.ResponseWriter, r *http.Request) {
 		Phone: stripe.String(a),
 	}
 	cp.SetSource(token)
-	c, _ := customer.New()
+	c, _ := customer.New(cp)
 	log.Print(c)
 	w.Write([]byte(`ok`))
 }
