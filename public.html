@@ -105,13 +105,16 @@ a {
             font-size: 1.2em;
             font-family: 'Roboto', sans-serif;
 }
+}
+.fa-cc-mastercard {
+    font-size: 20px;
+}
     .abcded {
             color: #66BB6A;
-            font-weight: 100;
+            font-weight: 300;
             letter-spacing: 1.5px;
-            font-size: 1.2em;
+            font-size: .9em;
             font-family: 'Roboto', sans-serif;
-}
 }
 #addre {
     font-size: 16px;
@@ -221,11 +224,14 @@ a {
     font-size: 12px;
     color: ghostwhite;
 }
+input.InputElement.is-empty.Input.Input--empty {
+    font-weight: 100;
+    letter-spacing: 1.5px;
+}
     </style>
 </head>
 <body>
     <div class="container-fluid">
-        <!-- HEADER -->
         <div class="row">
             <div class="col-12 center">
                 <img id="logo" src="http://www.whitehartbar.com.au/images/logo.png" alt="logo">
@@ -248,11 +254,13 @@ a {
         </div>
         <div id="menub">
             <div class="row justify-content-center">
+                    <span class="abcdef com">Tap</span>&nbsp;&nbsp;
                     <span class="abcdef com">Beer</span>&nbsp;&nbsp;
                     <span class="abcdef com">Wine</span>&nbsp;&nbsp;
                     <span class="abcdef com">Cocktails</span>&nbsp;&nbsp;
                     <span class="abcdef com">Spirits</span>&nbsp;&nbsp;
-                    <span class="abcdef com">Bottles & Cans</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Bottles</span>&nbsp;&nbsp;
+                    <span class="abcdef com">Cans</span>&nbsp;&nbsp;
                     <span class="abcdef com">Eat</span>
             </div>
         </div>
@@ -272,18 +280,16 @@ a {
         </div>
         <div id="userb">
             <div class="row">
-                <div class="col-12 center">
+                <div class="col-md-4 col-lg-3">
                     <span id="uid" class="com ider"></span>
-                    <span id="ulo" class="hlog com">&nbsp;&nbsp;LOGOUT</span>
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div id="addcard" class="col-4 col-md-3 col-lg-2">
-                    <div class="center"><i class="fab fa-cc-mastercard"></i></div>
-                    <div class="center abcded">+ ADD CARD</div>
-                </div>
                 <div id="stripeadd" class="col-12 col-md-4 col-lg-3">
                     <div id="card-el"></div>
+                </div>
+                <div class="center col-12 col-md-4 col-lg-3">
+                    <span id="stripecon" class="abcded">+ ADD CARD</span>
                 </div>
             </div>
         </div>
@@ -300,13 +306,14 @@ a {
                     <p class="abcde center">Melbournes CBD now has a WHITE HART.</p>  
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 center">
+                    <span id="instagram" class="com"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
+                    <span id="facebook" class="com"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
+                    <span id="ulo" class="hlog com">&nbsp;&nbsp;LOGOUT</span>
+                </div>
+            </div>    
         </div>
-        <div class="row">
-            <div class="col-12 center">
-                <span id="instagram" class="com"><a href="https://www.instagram.com/whitehartmelbourne/?hl=en"><i class="fab fa-instagram"></i></a></span>&nbsp;&nbsp;
-                <span id="facebook" class="com"><a href="https://www.facebook.com/whitehartmelbourne/"><i class="fab fa-facebook"></i></a></span>
-            </div>
-        </div>    
     </div>
 
     <script>
@@ -334,13 +341,11 @@ a {
 
         card.mount("#card-el");
 
-
-        $("#addcard").click(function() {
-            $("#addcard").hide();
-            $("#stripeadd").show();
+        $("#stripecon").click(function() {
+            stripe.createToken(card).then(function(result) {
+                console.log(result);
+            });
         });
-
-        $("#stripeadd").hide();
         $("#upwd").hide();
         $("#logoutb").hide();
         $("#cart").hide();
