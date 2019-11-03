@@ -54,19 +54,10 @@ a {
         margin-bottom: 8px;
         cursor: pointer;
     }
-    #menu {
+    .menus {
         font-size: 16px;
         font-weight: 300;
     }
-    #music {
-        font-size: 16px;
-        font-weight: 300;
-    }
-    #events {
-        font-size: 16px;
-        font-weight: 300;
-    }
-    
     .abcde {
             color: ghostwhite;
             font-weight: 100;
@@ -83,15 +74,7 @@ a {
         margin-bottom: 8px;
         cursor: pointer;
     }
-    #menu {
-        font-size: 15px;
-        font-weight: 300;
-    }
-    #music {
-        font-size: 15px;
-        font-weight: 300;
-    }
-    #events {
+    .menus {
         font-size: 15px;
         font-weight: 300;
     }
@@ -129,12 +112,7 @@ a {
     font-weight: 100;
     font-size: .9em;
 }
-.log {
-    color: ghostwhite;
-    font-weight: 100;
-    font-size: 18px;
-}
-.log:hover {
+.menus:hover {
     font-weight: 300;
 }
 .com {
@@ -215,6 +193,11 @@ a {
     font-size: 12.5px;
     font-weight: 100;
 }
+.txtli {
+    color: #727272;
+    font-size: 13px;
+    font-weight: 300;
+}
 #ucart {
     color: #616161;
     font-weight: 100;
@@ -228,20 +211,6 @@ a {
 #cardlist {
     font-size: 12px;
     color: ghostwhite;
-}
-.ElementsApp .InputElement {
-    color: ghostwhite;
-    font-family: 'Roboto', sans-serif;
-    font-size: .9em;
-    letter-spacing: 2px;
-    font-weight: 300;
-}
-.ElementsApp .InputElement::placeholder {
-    color: #626262;
-    font-family: 'Roboto', sans-serif;
-    font-size: .9em;
-    letter-spacing: 2px;
-    font-weight: 100;
 }
     </style>
 </head>
@@ -294,28 +263,32 @@ a {
             </div>
         </div>
         <div id="userb">
+            <div id="stripehider">
+                    <div class="row justify-content-center">
+                        <div id="stripeadd" class="col-12 col-md-4 col-lg-3">
+                            <div id="card-el"></div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="center col-12 col-md-4 col-lg-3">
+                            <span id="stripecon" class="abcded">+Add Card</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="stripeprogress" class="row justify-content-center">
+                    <div class="center col-12 col-md-4 col-lg-3 abcde">Confirming 2847 ...</div>
+                </div>
+                <div id="userhider" class="row justify-content-center">
+                    <div class="col-5 col-md-2 col-lg-2 txtli">Card <span class="hlog">DEL</span></div>
+                    <div id="usercard" class="right col-5 col-md-2 col-lg-2 abcde"></div>
+                </div>
             <div class="row justify-content-center">
                 <div class="col-6">
                     <span class="com wer">NUMBER</span>
                 </div>
                 <div class="col-6 right">
-                    <span id="uid" class="com ider"></span>
+                    <span id="uid" class="com ider">0415 689 049</span>
                 </div>
-            </div>
-            <div id="stripehider">
-                <div class="row justify-content-center">
-                    <div id="stripeadd" class="col-12 col-md-4 col-lg-3">
-                        <div id="card-el"></div>
-                    </div>
-                </div>
-                <div class="row justify-content-center"></div>
-                    <div class="center col-12 col-md-4 col-lg-3">
-                        <span id="stripecon" class="abcded">+ ADD CARD</span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="usercard" class="center col-12 col-md-4 col-lg-3 txt"></div>
             </div>
         </div>
         <div id="pub">
@@ -348,16 +321,20 @@ a {
 
         var style = {
                         base: {
-                            color: '#32325d',
+                            color: '#f4f4f4',
                             fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
                             fontSmoothing: 'antialiased',
                             fontSize: '16px',
+                            fontWeight: '100',
+                            letterSpacing: '1.7px',
                             '::placeholder': {
-                            color: '#aab7c4'
+                            color: '#757575',
+                            fontWeight: '100',
+                            letterSpacing: '1.7px',
                             }
                         },
                         invalid: {
-                            color: '#fa755a',
+                            color: '#E53935',
                             iconColor: '#fa755a'
                         }
                     };
@@ -372,23 +349,21 @@ a {
                     console.log(result.error);
                     return
                 }
+                $("#stripehider").hide()
+                $("#stripeprogress").show();
                 var fd = new FormData();
                 fd.append("token", result.token.id)
                 fetch("/cardtoken", {
                     method: "post",
                     body: fd,
                 }).then(function(response) {
-                    if (response.Status !== 200) {
-                        console.log("200 err");
-                        return
-                    }
                     response.text().then(function(text) {
                         if (text == "err") {
                             console.log("err");
                             return
                         }
-                        $("#stripehider").hide();
-                        $("#usercard").show();
+                        $("#stripeprogress").hide();
+                        $("#userhider").show();
                         $("#usercard").text(text);
                     });
                 }).catch(function(err) {
@@ -396,7 +371,8 @@ a {
                 });
             });
         });
-        $("#usercard").hide();
+        $("#stripeprogress").hide();
+        $("#userhider").hide();
         $("#upwd").hide();
         $("#logoutb").hide();
         $("#cart").hide();
@@ -445,7 +421,7 @@ a {
         });
         $("#upwd").keyup(function() {
             var a = $("#upwd").val();
-            if (a.length==6) {
+            if (a.length>=5) {
                 $("#ucon").show();
                 return;
             }

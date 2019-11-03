@@ -7,6 +7,7 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
+
 	"math/rand"
 	"net/http"
 	"net/url"
@@ -18,7 +19,7 @@ import (
 	"cloud.google.com/go/firestore"
 	"github.com/google/uuid"
 	stripe "github.com/stripe/stripe-go"
-	"github.com/stripe/stripe-go/customer"
+	customer "github.com/stripe/stripe-go/customer"
 )
 
 var fs *firestore.Client
@@ -51,37 +52,15 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
-func whoam(r *http.Request) string {
-	c, e := r.Cookie("whart")
-	if e != nil {
-		return ""
-	}
-	ss := os.Getenv("SESHSECRET")
-	q, er := fs.Collection("sessions").Doc(c.Value + ss).Get(context.Background())
-	if er != nil {
-		return ""
-	}
-	a := q.Data()
-	u := a["user"].(string)
-	us := `0` + string(u[3:])
-	return us
-}
-
 func cardtoken(w http.ResponseWriter, r *http.Request) {
-	a := whoam(r)
-	if a == "" {
-		w.Write([]byte(`err`))
-		return
-	}
 	token := r.FormValue("token")
 	stripe.Key = "sk_test_XCvlmn17AXsURaJN66uYs1Mk"
 	cp := &stripe.CustomerParams{
-		Phone: stripe.String(a),
+		Phone: stripe.String("0416580041"),
 	}
 	cp.SetSource(token)
 	c, _ := customer.New(cp)
-	log.Print(c)
-	w.Write([]byte(`ok`))
+	io.WriteString(w, c.ID)
 }
 
 func logout(w http.ResponseWriter, r *http.Request) {
