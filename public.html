@@ -232,7 +232,7 @@ a {
                 <span id="menu" class="log com">MENU</span>&nbsp;&nbsp;
                 <span id="music" class="log com">MUSIC</span>&nbsp;&nbsp;
                 <span id="events" class="log com">EVENTS</span>&nbsp;&nbsp;
-                <input id="unum" class="com" type="text" autocomplete="off" placeholder="0480019099" maxlength="10" />
+                <input id="unum" class="com" type="text" autocomplete="off" placeholder="0480019099" maxlength="12" />
                 <input id="upwd" type="text" class="com" autocomplete="off" placeholder="219663" maxlength="6" />
                 <span id="usms" class="com">&nbsp;&nbsp;SMS</span>
                 <span id="ucon" class="com">&nbsp;&nbsp;CONFIRM</span>
@@ -417,10 +417,10 @@ a {
 
         $("#unum").keyup(function() {
             var a = $("#unum").val();
-            if (a.length == 4) {
+            if (a.length == 4) || (a.length == 8) {
                 $("#unum").val(a+" ");
             }
-            if ((a.length == 10) && (a.includes("04"))) {
+            if ((a.length == 12) && (a.includes("04"))) {
                 $("#usms").show();
                 return;
             }
