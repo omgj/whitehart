@@ -44,6 +44,7 @@ func main() {
 	http.HandleFunc("/txtpwd", txtpwd)
 	http.HandleFunc("/cardtoken", cardtoken)
 	http.HandleFunc("/codeconf", codeconf)
+	http.HangleFunc("/addtocart", addtocart)	
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
