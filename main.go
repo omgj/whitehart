@@ -38,6 +38,7 @@ func init() {
 }
 
 func main() {
+	log.Println("listening on 8080")
 	http.HandleFunc("/", public)
 	http.HandleFunc("/whoami", whoami)
 	http.HandleFunc("/logout", logout)
