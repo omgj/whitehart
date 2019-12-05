@@ -3,7 +3,7 @@ WORKDIR /Users/oliver/go/whitehart
 COPY . /go/src/app
 
 RUN go mod download
-RUN  go build -o /go/bin/app
+RUN go get -d -v ./...
 
 FROM gcr.io/distroless/base-debian10
 COPY --from=build /go/bin/app /
