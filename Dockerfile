@@ -2,7 +2,7 @@ FROM golang:1.13-buster as build
 WORKDIR /Users/oliver/go/whitehart
 COPY . /go/src/app
 
-RUN go get -d -v ./...
+RUN go mod tidy
 
 RUN go build -o /go/bin/app
 
