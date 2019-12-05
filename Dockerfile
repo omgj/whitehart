@@ -1,10 +1,13 @@
-FROM golang:latest
+FROM golang:1.13-buster as build
 WORKDIR /Users/oliver/go/whitehart
-COPY . .
+COPY . /go/src/app
 
 RUN go mod download
-RUN  go build -o main .
+RUN  go build -o /go/bin/app
+
+FROM gcr.io/distroless/base-debian10
+COPY --from=build /go/bin/app /
 
 EXPOSE 8080
 
-CMD ["./main"]
+CMD ["./app"]
