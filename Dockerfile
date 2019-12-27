@@ -1,4 +1,4 @@
-FROM golang:1.13-buster as builder
+FROM golang:1.13-buster as build
 ENV GO111MODULE=on
 WORKDIR /app
 COPY go.mod .
