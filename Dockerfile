@@ -1,8 +1,7 @@
 FROM golang:1.13-buster as builder
 ENV GO111MODULE=on
 WORKDIR /Users/oliver/go/whitehart
-COPY go.mod /go/src/app
-COPY go.sum /go/src/app
+COPY go.mod go.sum /go/src/app/
 RUN go mod download
 
 COPY . /go/src/app
