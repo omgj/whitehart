@@ -14,4 +14,4 @@ FROM gcr.io/distroless/base-debian10
 COPY --from=build /go/bin/app /go/bin/app
 
 EXPOSE 8080
-CMD ["app"]
+CMD ["/go/bin/app"]
